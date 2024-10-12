@@ -1,7 +1,7 @@
 ## 目录结构
 
 ```
-GAP-GCN
+skeleton-acton-det
 │  ensemble.py
 │  **environment.yml**
 │  KLLoss.py
@@ -43,8 +43,11 @@ GAP-GCN
 
 
 ## 训练好的模型目录:
- **'[work_dir/ctrgcn]/lst_joint/best.pt'**
- 
+ ```
+ - work_dir/ctrgcn
+      -joint/best.pt
+  ...
+```
 
 ## 代码依赖库
 The main environment configuration is as follows,
