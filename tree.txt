@@ -1,0 +1,159 @@
+卷 数据 的文件夹 PATH 列表
+卷序列号为 8951-704F
+D:.
+│  ensemble.py
+│  environment.yml
+│  KLLoss.py
+│  LICENSE
+│  main_multipart_uav.py
+│  README.md
+│  run.sh
+│  Text_Prompt.py
+│  tools.py
+│  tree.txt
+│  utils.py
+│  
+├─clip
+│  │  bpe_simple_vocab_16e6.txt.gz
+│  │  clip.py
+│  │  model.py
+│  │  simple_tokenizer.py
+│  │  __init__.py
+│  │  
+│  └─__pycache__
+│          clip.cpython-38.pyc
+│          model.cpython-38.pyc
+│          simple_tokenizer.cpython-38.pyc
+│          __init__.cpython-38.pyc
+│          
+├─config
+│  └─uav-cross-subject
+│          lst_bone_v1.yaml
+│          lst_bone_v2.yaml
+│          lst_bone_vel_v1.yaml
+│          lst_bone_vel_v2.yaml
+│          lst_joint_v1.yaml
+│          lst_joint_v2.yaml
+│          lst_joint_vel_v1.yaml
+│          lst_joint_vel_v2.yaml
+│          
+├─data
+│  └─uav
+│      │  get_raw_denoised_data.py
+│      │  get_raw_skes_data.py
+│      │  seq_transformation.py
+│      │  UAV_XSub_V1.npz
+│      │  UAV_XSub_V2.npz
+│      │  
+│      └─statistics
+│              Backpack.txt
+│              extract_statistics.py
+│              Gender.txt
+│              Hat.txt
+│              ignored_list.txt
+│              label.txt
+│              LowerClothing.txt
+│              PersonID.txt
+│              Replicate.txt
+│              setup.txt
+│              skes_available_name.txt
+│              skes_available_name_all.txt
+│              timestamp.txt
+│              UpperClothing.txt
+│              
+├─feeders
+│  │  bone_pairs.py
+│  │  feeder_ntu.py
+│  │  feeder_uav.py
+│  │  feeder_ucla.py
+│  │  tools.py
+│  │  __init__.py
+│  │  
+│  └─__pycache__
+│          bone_pairs.cpython-38.pyc
+│          feeder_ntu.cpython-38.pyc
+│          feeder_uav.cpython-38.pyc
+│          feeder_ucla.cpython-38.pyc
+│          tools.cpython-38.pyc
+│          __init__.cpython-38.pyc
+│          
+├─graph
+│  │  ntu_rgb_d.py
+│  │  tools.py
+│  │  uav.py
+│  │  ucla.py
+│  │  __init__.py
+│  │  
+│  ├─infogcn
+│  │  │  ntu_rgb_d.py
+│  │  │  tools.py
+│  │  │  uav.py
+│  │  │  ucla.py
+│  │  │  __init__.py
+│  │  │  
+│  │  └─__pycache__
+│  │          ntu_rgb_d.cpython-38.pyc
+│  │          tools.cpython-38.pyc
+│  │          uav.cpython-38.pyc
+│  │          ucla.cpython-38.pyc
+│  │          __init__.cpython-38.pyc
+│  │          
+│  └─__pycache__
+│          ntu_rgb_d.cpython-38.pyc
+│          tools.cpython-38.pyc
+│          uav.cpython-38.pyc
+│          ucla.cpython-38.pyc
+│          __init__.cpython-38.pyc
+│          
+├─model
+│  │  activation.py
+│  │  baseline.py
+│  │  ctrgcn.py
+│  │  __init__.py
+│  │  
+│  ├─utils
+│  │      graph_unused.py
+│  │      tgcn.py
+│  │      __init__.py
+│  │      
+│  └─__pycache__
+│          baseline.cpython-38.pyc
+│          ctrgcn.cpython-38.pyc
+│          ctrgcn2.cpython-38.pyc
+│          ctrgcn3.cpython-38.pyc
+│          __init__.cpython-38.pyc
+│          
+├─text
+│      uav_label_map.txt
+│      uav_motion_describe.txt
+│      uav_motion_details.txt
+│      uav_pasta_openai.txt
+│      uav_synonym_openai.txt
+│      uav_used_parts-openai.txt
+│      
+├─torchlight
+│  │  setup.py
+│  │  
+│  ├─torchlight
+│  │  │  gpu.py
+│  │  │  util.py
+│  │  │  __init__.py
+│  │  │  
+│  │  └─__pycache__
+│  │          gpu.cpython-38.pyc
+│  │          util.cpython-38.pyc
+│  │          __init__.cpython-38.pyc
+│  │          
+│  └─torchlight.egg-info
+│          dependency_links.txt
+│          PKG-INFO
+│          SOURCES.txt
+│          top_level.txt
+│          
+├─work_dir
+└─__pycache__
+        KLLoss.cpython-38.pyc
+        Text_Prompt.cpython-38.pyc
+        tools.cpython-38.pyc
+        utils.cpython-38.pyc
+        
