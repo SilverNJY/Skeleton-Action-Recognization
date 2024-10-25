@@ -1,144 +1,130 @@
 import argparse
-import pickle
-import os
-
 import numpy as np
 from tqdm import tqdm
 from scipy.special import softmax
 
-# sm_best 0.5 0.4 0.1 0.3 77.1 nsm_best 0.7 0.6 0.1 0.3 76.9
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--dataset",
-        choices={
-            "uav/xsub_v1",
-            "uav/xsub_v2",
-            "ntu/xsub",
-            "ntu/xview",
-            "ntu120/xsub",
-            "ntu120/xset",
-            "NW-UCLA",
-        },
-        default="uav/ctrgcn",
-        help="the work folder for storing results",
-    )
-    parser.add_argument("--alpha", default=1, help="weighted summation", type=float)
-    parser.add_argument(
-        "--label-path", help="path to the label file", default="data/test_label.npy"
-    )
-    parser.add_argument("--joint-dir", default="results/joint_nsm_B.npy")
-    parser.add_argument("--bone-dir", default="results/bone_nsm_B.npy")
-    parser.add_argument("--joint-motion-dir", default="results/joint_vel_nsm_B.npy")
-    parser.add_argument("--bone-motion-dir", default="results/bone_vel_nsm_B.npy")
+# 从配置文件中加载模型配置和数据集配置
+from ensemble_config import model_config, dataset_config
 
-    arg = parser.parse_args()
 
-    dataset = arg.dataset
-    if "UCLA" in arg.dataset:
-        label = []
-        with open("./data/" + "NW-UCLA/" + "/val_label.pkl", "rb") as f:
-            data_info = pickle.load(f)
-            for index in range(len(data_info)):
-                info = data_info[index]
-                label.append(int(info["label"]) - 1)
-    elif "ntu120" in arg.dataset:
-        if "xsub" in arg.dataset:
-            npz_data = np.load("./data/" + "ntu120/" + "NTU120_CSub.npz")
-            label = np.where(npz_data["y_test"] > 0)[1]
-        elif "xset" in arg.dataset:
-            npz_data = np.load("./data/" + "ntu120/" + "NTU120_CSet.npz")
-            label = np.where(npz_data["y_test"] > 0)[1]
-    elif "ntu" in arg.dataset:
-        if "xsub" in arg.dataset:
-            npz_data = np.load("./data/" + "ntu/" + "NTU60_CS.npz")
-            label = np.where(npz_data["y_test"] > 0)[1]
-        elif "xview" in arg.dataset:
-            npz_data = np.load("./data/" + "ntu/" + "NTU60_CV.npz")
-            label = np.where(npz_data["y_test"] > 0)[1]
-    elif "uav" in arg.dataset:
-        label = np.load(arg.label_path, mmap_mode="r")
+def load_data(label_path, model_paths):
+    label = np.load(label_path, mmap_mode="r")
+    results = [np.load(path, mmap_mode="r") for path in model_paths]
+    return label, results
 
-    else:
-        raise NotImplementedError
 
-    r1 = np.load(arg.joint_dir, mmap_mode="r")
-    r2 = np.load(arg.bone_dir, mmap_mode="r")
+def weighted_sum(results, weights):
+    result_sum = np.zeros_like(results[0])
+    for i, result in enumerate(results):
+        result_sum += result * weights[i]
+    return result_sum
 
-    if arg.joint_motion_dir is not None:
-        r3 = np.load(arg.joint_motion_dir, mmap_mode="r")
-    if arg.bone_motion_dir is not None:
-        r4 = np.load(arg.bone_motion_dir, mmap_mode="r")
 
+def evaluate_model(label, results):
     right_num = total_num = right_num_5 = 0
-    pred_results = []  # 用于保存 softmax 后的结果
+    pred_results = []
 
-    if arg.joint_motion_dir is not None and arg.bone_motion_dir is not None:
-        arg.alpha = [0.7, 0.6, 0.1, 0.3]
+    for i in tqdm(range(len(label))):
+        l = label[i]
 
-        for i in tqdm(range(len(label))):
-            l = label[i]
-            r11 = r1[i]
-            r22 = r2[i]
-            r33 = r3[i]
-            r44 = r4[i]
+        # 已经是融合后的结果，直接进行softmax
+        r = softmax(results[i])
+        pred_results.append(r)
 
-            r = (
-                r11 * arg.alpha[0]
-                + r22 * arg.alpha[1]
-                + r33 * arg.alpha[2]
-                + r44 * arg.alpha[3]
-            )
-            r = softmax(r)  # 对组合后的结果进行softmax处理
-            pred_results.append(r)  # 将softmax后的结果保存到列表中
+        # 获取 Top-5 排名
+        rank_5 = r.argsort()[-5:]
+        right_num_5 += int(int(l) in rank_5)
 
-            rank_5 = r.argsort()[-5:]
-            right_num_5 += int(int(l) in rank_5)
-            r = np.argmax(r)
-            right_num += int(r == int(l))
-            total_num += 1
-        acc = right_num / total_num
-        acc5 = right_num_5 / total_num
-    elif arg.joint_motion_dir is not None and arg.bone_motion_dir is None:
-        arg.alpha = [0.6, 0.6, 0.4]
-        for i in tqdm(range(len(label))):
-            l = label[:, i]
-            r11 = r1[i]
-            r22 = r2[i]
-            r33 = r3[i]
+        # 获取 Top-1 预测
+        r = np.argmax(r)
+        right_num += int(r == int(l))
+        total_num += 1
 
-            r = r11 * arg.alpha[0] + r22 * arg.alpha[1] + r33 * arg.alpha[2]
-            r = softmax(r)  # 对组合后的结果进行softmax处理
-            pred_results.append(r)  # 将softmax后的结果保存到列表中
+    # 计算准确率
+    acc = right_num / total_num
+    acc5 = right_num_5 / total_num
 
-            rank_5 = r.argsort()[-5:]
-            right_num_5 += int(int(l) in rank_5)
-            r = np.argmax(r)
-            right_num += int(r == int(l))
-            total_num += 1
-        acc = right_num / total_num
-        acc5 = right_num_5 / total_num
-    else:
-        for i in tqdm(range(len(label))):
-            l = label[i]
-            r11 = r1[i]
-            r22 = r2[i]
+    return acc, acc5, np.array(pred_results)
 
-            r = r11 + r22 * arg.alpha
-            r = softmax(r)  # 对组合后的结果进行softmax处理
-            pred_results.append(r)  # 将softmax后的结果保存到列表中
 
-            rank_5 = r.argsort()[-5:]
-            right_num_5 += int(int(l) in rank_5)
-            r = np.argmax(r)
-            right_num += int(r == int(l))
-            total_num += 1
-        acc = right_num / total_num
-        acc5 = right_num_5 / total_num
+def save_predictions(predictions, output_path):
+    np.save(output_path, predictions)
 
-    print("Top1 Acc: {:.4f}%".format(acc * 100))
-    print("Top5 Acc: {:.4f}%".format(acc5 * 100))
 
-    # 将softmax后的预测结果保存到npy文件
-    pred_results = np.array(pred_results)
-    np.save("results/pred.npy", pred_results)
+def generate_model_paths(model_config, dataset):
+    """根据传入的模型配置自动生成路径"""
+    paths = []
+    for model_name, model_info in model_config.items():
+        modalities = model_info["modalities"]
+        for modality in modalities:
+            paths.append(f"results/{model_name}/{modality}/{dataset}.npy")
+    return paths
+
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    # 从配置文件中读取数据集类型和路径
+    parser.add_argument(
+        "--dataset-type",
+        choices=["A", "B"],
+        default=dataset_config["dataset_type"],
+        help="Choose dataset type A or B",
+    )
+    parser.add_argument(
+        "--output-path",
+        default=dataset_config["output_path"],
+        help="Path to save predictions",
+    )
+
+    args = parser.parse_args()
+
+    # 动态生成 label path
+    label_path = f"data/test_label_{args.dataset_type}.npy"
+
+    # 自动生成模型路径
+    model_paths = generate_model_paths(model_config, args.dataset_type)
+
+    # 加载数据
+    label, model_results = load_data(label_path, model_paths)
+
+    # 每个模型的模态加权求和
+    final_results_per_model = []
+    model_offset = 0
+    for model_name, model_info in model_config.items():
+        modalities = model_info["modalities"]
+        weights = model_info["weights"]
+
+        model_modal_results = model_results[
+            model_offset : model_offset + len(modalities)
+        ]
+        model_offset += len(modalities)
+
+        weighted_modality_sum = [
+            weighted_sum([res[j] for res in model_modal_results], weights)
+            for j in range(len(label))
+        ]
+        final_results_per_model.append(weighted_modality_sum)
+
+    # 模型间加权
+    model_weights = [
+        model_info["weight"] for model_name, model_info in model_config.items()
+    ]
+    final_results = [
+        weighted_sum([res[i] for res in final_results_per_model], model_weights)
+        for i in range(len(label))
+    ]
+
+    # 评估模型
+    acc, acc5, predictions = evaluate_model(label, final_results)
+
+    # 输出结果
+    print(f"Top1 Acc: {acc * 100:.4f}%")
+    print(f"Top5 Acc: {acc5 * 100:.4f}%")
+
+    # 保存预测结果
+    save_predictions(predictions, args.output_path)
+
+
+if __name__ == "__main__":
+    main()
