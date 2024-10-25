@@ -29,7 +29,8 @@ from tqdm import tqdm
 from torchlight import DictAction
 from tools import *
 from Text_Prompt import *
-from KLLoss import KLLoss
+from loss import *
+from model.infogcn import get_mmd_loss
 
 classes, num_text_aug, text_dict = uav_text_prompt_openai_pasta_pool_4part()
 # text_list = text_prompt_openai_random()
@@ -83,14 +84,14 @@ def get_parser():
     )
     parser.add_argument(
         "--work-dir",
-        default="./work_dir/uav",
+        default="./work_dir/",
         help="the work folder for storing results",
     )
 
     parser.add_argument("-model_saved_name", default="")
     parser.add_argument(
         "--config",
-        default="./config/uav-cross-subject/lst_joint_v2.yaml",
+        default="./config/ctrgcn/k8.yaml",
         help="path to the configuration file",
     )
 
@@ -147,7 +148,7 @@ def get_parser():
     parser.add_argument(
         "--num-worker",
         type=int,
-        default=1,
+        default=32,
         help="the number of worker for data loader",
     )
     parser.add_argument(
@@ -178,6 +179,19 @@ def get_parser():
         nargs="+",
         help="the name of weights which will be ignored in the initialization",
     )
+    parser.add_argument('--cl-mode', choices=['ST-Multi-Level'], default=None,
+                        help='mode of Contrastive Learning Loss')
+    parser.add_argument('--cl-version', choices=['V0', 'V1', 'V2', "NO FN", "NO FP", "NO FN & FP"], default='V0',
+                        help='different way to calculate the cl loss')
+    parser.add_argument('--pred_threshold', type=float, default=0.0, help='threshold to define the confident sample')
+    parser.add_argument('--use_p_map', type=str2bool, default=True,
+                        help='whether to add (1 - p_{ik}) to constrain the auxiliary item')
+    parser.add_argument('--start-cl-epoch', type=int, default=-1, help='epoch to optimize cl loss')
+    parser.add_argument('--w-cl-loss', type=float, default=0.1, help='weight of cl loss')
+    parser.add_argument('--w-multi-cl-loss', type=float, default=[0.1, 0.2, 0.5, 1], nargs='+',
+                        help='weight of multi-level cl loss')
+    parser.add_argument('--lambda_1', type=float, default=1e-4)
+    parser.add_argument('--lambda_2', type=float, default=1e-1)
 
     # optim
     parser.add_argument(
@@ -253,13 +267,9 @@ class Processor:
                 )
         self.global_step = 0
         # pdb.set_trace()
+        self.load_data()
         self.load_model()
-
-        if self.arg.phase == "model_size":
-            pass
-        else:
-            self.load_optimizer()
-            self.load_data()
+        self.load_optimizer()
         self.lr = self.arg.base_lr
         self.best_acc = 0
         self.best_acc_epoch = 0
@@ -314,8 +324,20 @@ class Processor:
         # print(Model)
         self.model = Model(**self.arg.model_args)
         # print(self.model)
-        self.loss_ce = nn.CrossEntropyLoss().cuda(output_device)
-        self.loss = KLLoss().cuda(output_device)
+        self.loss_ce = MultiClassFocalLossWithAlpha(num_class=155).cuda(output_device)
+        # mem_size = self.data_loader['train'].dataset.__len__() if self.arg.phase == 'train' else 0    
+        # label_all = (
+        #     self.data_loader["train"].dataset.label if self.arg.phase == "train" else []
+        # )
+        # self.graphContrast = InfoNCEGraph(
+        #     in_channels=3 * 17 * 17,
+        #     out_channels=256,
+        #     class_num=self.arg.model_args["num_class"],
+        #     mem_size=mem_size,
+        #     label_all=label_all,
+        #     T=0.8,
+        # ).cuda(output_device)
+        self.klloss = KLLoss().cuda(output_device)
 
         self.model_text_dict = nn.ModuleDict()
 
@@ -448,7 +470,7 @@ class Processor:
         self.train_writer.add_scalar("epoch", epoch, self.global_step)
         self.record_time()
         timer = dict(dataloader=0.001, model=0.001, statistics=0.001)
-        process = tqdm(loader, ncols=80)
+        process = tqdm(loader, ncols=160, desc=f"Epoch {epoch + 1}", leave=True)
 
         for batch_idx, (data, label, index) in enumerate(process):
             self.global_step += 1
@@ -459,10 +481,17 @@ class Processor:
 
             # forward
             with torch.cuda.amp.autocast():
-                output, feature_dict, logit_scale, part_feature_list = self.model(data)
-
                 label_g = gen_label(label)
                 label = label.long().cuda(self.output_device)
+                if self.arg.cl_mode is not None:
+                    output, z, cl_loss, feature_dict, logit_scale, part_feature_list = self.model(data, label, get_cl_loss=True)
+                else:
+                    output, z, feature_dict, logit_scale, part_feature_list = self.model(data)
+                # mmd_loss, l2_z_mean, z_mean = get_mmd_loss(
+                #     z, self.model.z_prior, label, 155
+                # )
+                loss_txt = None
+                loss_info = None
                 loss_te_list = []
                 for ind in range(num_text_aug):
                     if ind > 0:
@@ -511,16 +540,16 @@ class Processor:
                             device=device,
                         )
 
-                    loss_imgs = self.loss(logits_per_image, ground_truth)
-                    loss_texts = self.loss(logits_per_text, ground_truth)
+                    loss_imgs = self.klloss(logits_per_image, ground_truth)
+                    loss_texts = self.klloss(logits_per_text, ground_truth)
 
                     loss_te_list.append((loss_imgs + loss_texts) / 2)
 
                 loss_ce = self.loss_ce(output, label)
-                loss = loss_ce + self.arg.loss_alpha * sum(loss_te_list) / len(
-                    loss_te_list
-                )
-
+                loss_txt = self.arg.loss_alpha * sum(loss_te_list) / len(loss_te_list)
+                loss = (
+                    loss_ce + loss_txt)
+                        
             scaler.scale(loss).backward()
 
             scaler.step(self.optimizer)
@@ -540,7 +569,7 @@ class Processor:
             self.train_writer.add_scalar("lr", self.lr, self.global_step)
             timer["statistics"] += self.split_time()
             process.set_postfix(
-                {"loss": float(loss.data.item()), "lr": float(self.lr)}, refresh=True
+                {"loss": float(loss.data.item()), "loss_txt":float(loss_txt.data.item()), "lr": float(self.lr)}, refresh=True
             )
             # statistics of time consumption and loss
         proportion = {
@@ -594,7 +623,7 @@ class Processor:
             label_list = []
             pred_list = []
             step = 0
-            process = tqdm(self.data_loader[ln], ncols=40)
+            process = tqdm(self.data_loader[ln], ncols=100, desc=f"Epoch {epoch + 1}", leave=True)
 
             for batch_idx, (data, label, index) in enumerate(process):
                 label_list.append(label)
@@ -603,8 +632,7 @@ class Processor:
                     b, _, _, _, _ = data.size()
                     data = data.float().cuda(self.output_device)
                     label = label.long().cuda(self.output_device)
-
-                    output, _, _, _ = self.model(data)
+                    output, *_ = self.model(data)
                     loss = self.loss_ce(output, label)
 
                     score_frag.append(output.data.cpu().numpy())
