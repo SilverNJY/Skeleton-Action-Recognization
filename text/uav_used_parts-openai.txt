@@ -1,0 +1,155 @@
+drink,hand,head
+eat snacks,hand,head
+brush hair,hand,head
+drop something,hand,head,leg
+pick up something,hand,legs,hips,head
+throw away something,hand,head
+sit down,hips,legs,head
+stand up,hips,legs,head
+applaud,hands
+read,head,hands
+write,hand,head
+put on a coat,hands,arms,head
+take off a coat,hands,arms,head
+put on glasses,hands,head
+take off glasses,hands,head
+put on a hat,hands,head
+take off a hat,hands,head
+throw away a hat,hand,head
+cheer,hands,head
+wave hands,hands,arm
+kick something,leg,head
+reach into pockets,hand,hip# add hip
+jump on single leg,leg
+jump on two legs,legs
+make a phone call,hand,head
+play with cell phones,hand
+point somewhere,hand,head
+look at the watch,hand,head
+rub hands,hands
+bow,head,hips,arm
+shake head,head
+salute,hand,head
+cross palms together,hands
+cross arms in front to say no,arms
+wear headphones,hands,head
+take off headphones,hands,head
+make a shh sign,hand,head
+touch the hair,hand,head
+thumb up,hand
+thumb down,hand
+make an OK sign,hand
+make a victory sign,hand
+punch with fists,hands,head,leg,hip
+finger snap,hand
+open the bottle,hands,head
+smell,head,head,arm
+squat,legs,hips,head
+apply cream to face,hand,head
+apply cream to hands,hands
+grasp a bag,hand,head,leg
+put down a bag,hand,head,leg
+put something into a bag,hand,head,leg
+take something out of a bag,hand,head,leg
+open a box,hands,head,hip
+move a box,hands,legs,head,hip
+put up hands,hands
+put hands on hips,hands,hips
+wrap arms around,arms
+shake arms,arms
+step on the spot walk,legs,hips,arms 
+kick aside,leg,hip,arm
+kick backward,leg,hip,arm
+cough,head,arm,hip
+sneeze,head,hip,hand
+yawn,head,hand,hip
+blow nose,hand,head,hip
+stagger,legs,hips,head,arms
+headache,head,arm,leg,hip,leg
+chest discomfort,arm,head,hip,leg
+backache,arm,head,hip,leg
+neck-ache,head,arm,hip,leg
+vomit,head,arm,hip,leg
+use a fan,hand
+stretch body,arms,head,hips
+punching someone,hand,hip
+kicking someone,leg,arm
+pushing someone,hands,head
+slap someone on the back,hand
+point someone,hand
+hug,arms,leg,hip,head
+give something to someone,head,arm,hip,leg
+steal something from other’s pocket,head,arm,hip,leg
+rob something from someone,head,arm,hip,leg
+shake hands,head,arm,hip,leg
+walk toward someone,legs,arms,head,hips 
+walk away from someone,legs,arms,head,hips
+hit someone with something,hand,head,leg,hip
+threat some with a knife,hand,head,leg,hip
+bump into someone,hips,legs,arms,headache
+walk side by side,head,arms,hips,legs 
+high five,head,arm,hip,leg
+drink a toast,hand,head
+move something with someone,head,arm,hip,leg
+take a phone for someone,head,arm,hip,leg
+stalk someone,head,arm,hip,leg
+whisper in someone’s ear,head,arm,hip,leg
+exchange something with someone,head,arm,hip,leg
+lend an arm to support someone,head,arm,hip,leg
+rock-paper-scissors,head,arm,hip,leg
+hover,arm
+land,arm
+land at designated locations,arms
+move forward,arm
+move backward,arm
+move left,arm
+move right,arm
+ascend,arm
+descend,arm
+accelerate,arm
+decelerate,arm
+come over here,head,arm,hip,leg
+stay where you are,head,arm,hip,leg
+rear right turn,arm
+rear left turn,arm
+abandon landing,head,arm,hip,leg
+all clear,head,arm,hip,leg
+not clear,head,arm,hip,leg
+have command,head,arm,hip,leg
+follow me,arm
+turn left,arm
+turn right,arm
+throw litter,head,arm,hip,leg
+dig a hole,head,arm,hip,leg
+mow,head,arm,hip,leg
+set on fire,head,arm,hip,leg
+smoke,hand,head,arm,hip,leg
+cut the tree,head,arm,hip,leg
+fishing,head,arm,hip,leg
+pick a lock,head,arm,hip,leg
+pollute walls,hands
+hold someone hostage,head,arm,hip,leg
+threat someone with a gun,head,arm,hip,leg
+wave a goodbye,head,arm,hip,leg
+chase someone,head,arm,hip,leg
+comfort someone,head,arm,hip,leg
+drag someone,head,arm,hip,leg
+sweep the floor,head,arm,hip,leg
+mop the floor,head,arm,hip,leg
+bounce the ball,head,arm,hip,leg
+shoot at the basket,head,arm,hip,leg
+swing the racket,hand
+leg pressing,head,arm,hip,leg 
+escape (to survive),head,arm,hip,leg
+call for help,head,arm,hip,leg
+wear a mask,hands,head
+take off a mask,hands,head
+bend arms around someone’s shoulder,head,arm,hip,leg
+run,legs,arms,hips
+stab someone with a knife,head,arm,hip,leg
+throw a frisbee,head,arm,leg
+carry a carrying pole,hands,head,hip
+use a lever to lift something,hands,hips,legs 
+walk,legs,arms,hips
+open an umbrella,hands,head
+close an umbrella,hands,head

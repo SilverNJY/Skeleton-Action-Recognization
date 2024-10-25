@@ -1,0 +1,155 @@
+drink; head tilts back slightly; hand holds cup; arm lifts cup to mouth; hip remains still; leg stays still; foot remains planted
+eat snacks; head looks down occasionally; hand reaches into snack bag; arm remains mostly stationary; hip stays still; leg stays still; foot stays planted
+brush hair; head remains mostly still, may tilt slightly; hand holds brush; arm moves in brushing strokes; hip stays still; leg stays still; foot stays planted
+drop something; head looks down following the object; hand releases object; arm may follow through slightly; hip stays still; leg stays still; foot stays planted
+pick up something; head looks down at object; hand grasps object; arm lowers and retracts; hip bends slightly; leg may bend to lower body; foot supports body
+throw away something; head may track where the object will go; hand holds object; arm makes a throwing gesture; hip might pivot for more force; leg adjusts for balance; foot may step for momentum
+sit down; head looks forward or down slightly; hand may assist in balancing; arm adjusts for stability; hip bends backwards; leg bends at the knees; foot remains planted until seated
+stand up; head rises; hands may push off from knees or armrests; arms assist in lifting; hip straightens; legs press down to lift body; foot pushes off ground
+applaud; head is directed toward the performance; hands come together; arms move back and forth slightly; hip stays static; leg remains still; foot stays planted
+read; head is tilted slightly down; hand holds book or device; arm holds or supports reading material; hip remains seated or stationary; leg is positioned for comfort; foot may be tucked or resting flat
+write; head slightly down; hand grips pen or pencil; arm stabilizes on surface; hip seated or still; leg positioned comfortably; foot flat or relaxed
+put on a coat; head neutral; hands insert into sleeves; arms raise to slide sleeves; hip steady; legs stationary; foot planted
+take off a coat; head neutral; hands pull sleeves; arms withdraw from sleeves; hip steady; legs stationary; foot planted
+put on glasses; head slightly tilted; hands adjust frames; arms raise glasses to eyes; hip stationary; legs still; foot stable
+take off glasses; head neutral; hands grasp frames; arms lower glasses; hip steady; legs stationary; foot planted
+put on a hat; head neutral; hand places hat on head; arm adjusts hat; hip steady; legs stationary; foot planted
+take off a hat; head neutral; hand grasps hat; arm lifts hat off; hip stationary; legs still; foot planted
+throw away a hat; head turns towards target; hand holds hat; arm swings to throw; hip rotates slightly; leg adjusts for balance; foot may pivot
+cheer; head elevated; hands clap or raise; arms lifted or waved; hip dynamic; legs may jump; foot stomping or planted
+wave hands; head facing target; hands wave; arms swing; hip may sway; legs stationary; foot planted
+kick something; head focuses on target; hand might balance; arm for stability; hip pivots; leg swings forward; foot strikes object
+reach into pockets; head neutral; hand digs into pocket; arm angled down; hip shifts weight; leg slightly bent; foot stable
+jump on single leg; head looks forward; hand balances; arm aids balance; hip lowers and lifts; leg pushes off; foot springs up
+jump on two legs; head straight; hands may assist; arms for balance; hip lowers and pushes up; legs bend and extend; feet propel off ground
+make a phone call; head tilts to hold phone; hand holds device; arm brings phone to ear; hip steady; legs stationary; foot planted
+play with cell phones; head down focused; hand taps and swipes; arm supports device; hip relaxed; legs in comfortable position; foot resting
+point somewhere; head turns towards direction; hand points; arm extends outward; hip aligns with arm; legs steady; foot planted
+look at the watch; head tilts to view watch; hand lifts to watch; arm bends at elbow; hip still; legs steady; foot stable
+rub hands; head neutral; hands rub together; arms move in small circles; hip steady; legs still; foot planted
+bow; head bows forward; hands may clasp; arms lower in front; hip bends slightly; legs bend at knees; foot remains grounded
+shake head; head shakes side to side; hands might be passive; arms at sides; hip steady; legs still; foot planted
+salute; head slightly tilted; hand touches brow; arm straight and raised; hip rigid; legs together; foot firm
+cross palms together; head neutral; hands cross at palms; arms crossed at wrists; hip steady; legs stationary; foot planted
+cross arms in front to say no; head firm; hands at elbows; arms crossed tightly; hip unmoved; legs still; foot grounded
+wear headphones; head slightly tilted; hands place headphones; arms raise to ears; hip steady; legs stationary; foot stable
+take off headphones; head neutral; hands grasp headphones; arms lower them; hip steady; legs still; foot planted
+make a shh sign; head tilts slightly; finger to lips; arm raises to face; hip still; legs quiet; foot silent
+touch the hair; head tilts back; hand runs through hair; arm raised; hip steady; legs still; foot planted
+thumb up; head smiles; hand raises with thumb up; arm slightly lifted; hip relaxed; legs still; foot stable
+thumb down; head neutral; hand lowers with thumb down; arm drops slightly; hip steady; legs stationary; foot planted
+make an OK sign; head remains neutral; hand forms circle with thumb and index; arm remains still; hip doesn't move; leg doesn't move; foot remains planted
+make a victory sign; head looks forward; hand raises with two fingers up; arm lifts slightly; hip stays still; leg doesn't move; foot remains still
+punch with fists; head focuses forward; hand clenches into fist; arm thrusts forward; hip pivots for power; leg remains grounded; foot pivots slightly
+figure snap; head looks at fingers; hand snaps fingers; arm supports the motion; hip stays still; leg doesn't move; foot remains planted
+open the bottle; head looks at bottle; hand grips cap; arm applies force; hip remains still; leg doesn't move; foot stays planted
+smell; head lowers to smell; hand may hold object; arm positions object; hip remains neutral; leg doesn't move; foot stays planted
+squat; head looks forward; hands can help balance; arms extend forward; hip pushes back and down; leg bends at knees; foot stays flat on ground
+apply cream to face; head is slightly tilted; hand spreads cream; arm maneuvers around face; hip remains still; leg doesn't move; foot remains planted
+apply cream to hands; head watches hands; hand applies cream to other; arm supports action; hip stays still; leg remains still; foot stays still
+grasp a bag; head directs gaze; hand clutches bag handle; arm tightens grip; hip may adjust; leg prepares to lift; foot plants for support
+put down a bag; head looks where to place; hand releases grip; arm lowers bag; hip leans over slightly; leg bends as needed; foot stabilizes position
+put something into a bag; head checks bag's opening; hand places item inside; arm reaches into bag; hip leans over if needed; leg stabilizes; foot remains planted
+take something out of a bag; head focuses on bag; hand searches inside; arm pulls item out; hip adjusts position; leg stabilizes; foot remains still
+open a box; head looks at box; hand opens lid or cuts tape; arm applies force; hip remains neutral; leg stays still; foot keeps balance
+move a box; head directs gaze; hands grip the box; arms lift or push; hip engages for support; leg steps or pivots; foot stabilizes or steps
+put up hands; head looks forward; hands raise up; arms lift up; hip stays still; leg doesn't move; foot remains planted
+put hands on hips; head remains upright; hands rest on hips; arms bend at elbows; hip pushes forward slightly; leg remains straight; foot stays planted
+wrap arms around; head may tilt; hands clasp other side; arms encircle; hip adjusts to embrace; leg balances; foot may adjust for stance
+shake arms; head can watch arms; hands relaxed; arms shake or swing; hip stays still; leg doesn't move; foot remains still
+step on the spot walk; head looks ahead; hands may swing; arms move naturally; hip rocks slightly; leg marches in place; foot lifts and lowers
+kick aside; head directs gaze to target; hand may balance; arm stays steady; hip pivots; leg swings to the side; foot pushes object aside
+kick backward; head stays forward; hand balances; arm aids for balance; hip rotates backward; leg kicks back; foot strikes behind
+cough; head tilts forward; hand covers mouth; arm moves to face; hip remains still; leg stays steady; foot planted
+sneeze; head quickly tilts down; hand covers nose; arm quick reflex to face; hip stationary; leg steady; foot grounded
+yawn; head leans back; hand may cover mouth; arm lifts slightly; hip remains still; leg stable; foot still
+blow nose; head tilts down; hand holds tissue; arm raises to nose; hip steady; leg stable; foot planted
+stagger; head sways; hand extends for balance; arm reaches out; hip unstable; leg wobbly; foot stumbles
+headache; head presses hand to temples; hand massages forehead; arm stationary; hip still; leg fixed; foot grounded
+chest discomfort; head leans back slightly; hand may clutch chest; arm tightens around torso; hip steady; leg stable; foot firm
+backache; head downcast; hand rubs lower back; arm reaches around; hip tilted; leg may bend for comfort; foot shifts weight
+neck-ache; head tilts stiffly; hand massages neck; arm supports hand; hip fixed; leg stationary; foot firm
+vomit; head leans forward; hand supports stomach; arm stabilizes body; hip bends forward; leg crouches; foot braces
+use a fan; head remains neutral; hand holds fan; arm operates fan; hip stays still; leg stationary; foot planted
+stretch body; head looks up; hand reaches upward; arm stretches above; hip shifts; leg stretches; foot pivots
+punching someone; head targets direction; hand clenched in fist; arm thrusts forward; hip rotates for power; leg stabilizes; foot pivots
+kicking someone; head focused on target; hand may swing for balance; arm aids balance; hip swings; leg drives forward; foot strikes
+pushing someone; head forward; hand extends; arm pushes forward; hip drives into push; leg steps forward; foot plants for leverage
+slap someone on the back; head looks at target; hand open; arm swings back then forward; hip slightly turns; leg steady; foot planted
+point someone; head turns toward target; hand points; arm extends; hip aligned with direction; leg stationary; foot planted
+hug; head over shoulder; hands wrap around; arms pull close; hip leans in; leg steps closer; foot supports balance
+give something to someone; head nods in acknowledgment; hand extends with item; arm reaches out; hip leans slightly; leg supports balance; foot remains planted
+steal something from other’s pocket; head looks around discreetly; hand slips into pocket; arm stays close to body; hip shields view; leg remains casual; foot steps lightly
+rob something from someone; head scans quickly; hand grabs forcefully; arm pulls item away; hip backs away; leg pivots; foot dashes
+shake hands; head tilts forward slightly; hand extends openly; arm moves forward; hip steady; leg stationary; foot planted
+walk toward someone; head looks at the person; hand may swing; arm naturally at sides; hip propels forward; leg strides; foot steps forward
+walk away from someone; head turns away; hand relaxes; arm swings lightly; hip guides direction; leg steps away; foot follows through
+hit someone with something; head targets person; hand grips object; arm swings object; hip pivots for force; leg stabilizes; foot grounds for impact
+threat someone with a knife; head glares intensely; hand wields knife; arm steadies weapon; hip tense; leg ready to lunge; foot planted for leverage
+bump into someone; head surprised; hand reacts to steady; arm reaches to apologize or balance; hip recoils; leg stumbles; foot regains footing
+walk side by side; head faces forward; hands relaxed; arms swing lightly; hip aligned with companion; leg matches pace; foot steps in rhythm
+high five; head smiles; hand raised high; arm swings up; hip slightly turned; leg casual; foot planted
+drink a toast; head nods in celebration; hand lifts glass; arm raises in toast; hip stays still; leg supports; foot firmly on ground
+move something with someone; head coordinates effort; hand grips object; arm works in tandem; hip balances load; leg pushes or pulls; foot stabilizes position
+take a phone for someone; head looks at phone; hand picks up phone; arm extends to deliver; hip leans towards table or person; leg slightly bent; foot stable
+stalk someone; head watches discreetly; hand hidden; arm ready to cover face; hip sneaks quietly; leg moves stealthily; foot treads softly
+whisper in someone’s ear; head close to person; hand may gesture for quiet; arm leans in; hip tilts towards person; leg bends slightly; foot steadies
+exchange something with someone; head observes the other; hand passes item; arm extends for trade; hip remains neutral; leg stands firm; foot planted
+lend an arm to support someone; head looks at assisted person; hand grips theirs or shoulder; arm supports; hip adjusts to lean; leg steps closer; foot stabilizes both
+rock-paper-scissors; head concentrates; hand forms shape; arm readies for throw; hip slightly engaged; leg neutral; foot relaxed
+hover; head focused ahead; hand steadies control; arm adjusts mechanism; hip balanced; leg bent slightly; foot hovers above ground or controls balance
+land; head focuses on landing zone; hand controls or steadies; arm adjusts controls; hip stable; leg ready to absorb impact; foot braces for contact
+land at designated locations; head precise on target; hand maneuvers finely; arm aids in exact control; hip aligned; leg poised; foot ready for precise touchdown
+move forward; head looks forward; hand engages forward gear; arm extends to control; hip shifts slightly; leg pushes on accelerator; foot steps forward
+move backward; head checks behind; hand shifts to reverse; arm pulls back; hip adjusts; leg presses slightly; foot eases back
+move left; head turns left; hand steers left; arm follows steering; hip shifts into curve; leg adjusts; foot pivots left
+move right; head turns right; hand steers right; arm follows steering; hip shifts into turn; leg corrects; foot pivots right
+ascend; head looks upward; hand lifts controls; arm rises; hip lightens; leg stretches; foot lifts off ground
+descend; head lowers gaze; hand lowers controls; arm descends; hip sinks; leg bends; foot eases down
+accelerate; head focuses ahead; hand thrusts forward; arm pushes; hip pushes into seat; leg extends; foot presses accelerator
+decelerate; head prepares for slow down; hand pulls back; arm retracts; hip pulls back; leg bends; foot eases off accelerator
+come over here; head gestures invitingly; hand waves closer; arm beckons; hip leans forward; leg steps toward direction; foot points here
+stay where you are; head firm; hand signals to halt; arm extends stop gesture; hip steady; leg plants firmly; foot stays put
+rear right turn; head looks back right; hand grasps rear right control; arm pulls towards body; hip pivots right; leg braces; foot adjusts
+rear left turn; head looks back left; hand grasps rear left control; arm pulls towards body; hip pivots left; leg braces; foot adjusts
+abandon landing; head shakes no; hand cuts off descent; arm retracts actions; hip readjusts to neutral; leg stabilizes; foot halts all motion
+all clear; head nods approval; hand signals all clear; arm gestures broadly; hip relaxed; leg at ease; foot steady
+not clear; head shakes or frowns; hand shows stop; arm waves off; hip tenses; leg ready to move; foot poised to act
+have command; head held high; hand takes control; arm firm; hip authoritative; leg supports posture; foot planted firmly
+follow me; head beckons forward; hand gestures onward; arm leads the way; hip directs movement; leg moves confidently; foot steps forward
+turn left; head checks left; hand steers left; arm coordinates turn; hip shifts left; leg aligns with turn; foot pivots left
+turn right; head checks right; hand steers; arm assists steering; hip shifts slightly; leg stabilizes; foot pivots
+throw litter; head looks around; hand opens; arm swings to throw; hip turns away; leg slightly bends; foot plants for leverage
+dig a hole; head looks down; hand grips shovel; arm digs; hip pivots with each movement; leg bends; foot presses into ground
+mow; head watches path; hand pushes mower; arm steadies mower; hip follows motion; leg walks behind; foot pushes off ground
+set on fire; head backs away; hand lights match; arm extends to fire source; hip leans back; leg steps back; foot stabilizes
+smoke; head tilts slightly; hand holds cigarette; arm relaxed; hip at ease; leg casual; foot rests
+cut the tree; head watches tree; hand grips saw; arm saws back and forth; hip sways with motion; leg braces; foot plants firmly
+fishing; head scans water; hand holds rod; arm casts line; hip steadies; leg supports; foot grips ground
+pick a lock; head focuses closely; hand manipulates tools; arm steadies; hip leans over; leg kneels; foot balances
+pollute walls; head looks for observers; hand sprays paint; arm moves in patterns; hip shifts with arm; leg steps along wall; foot stabilizes
+hold someone hostage; head on alert; hand grips arm; arm restrains; hip braces for struggle; leg blocks escape; foot plants firmly
+threat someone with a gun; head steady; hand holds gun; arm aims; hip supports stance; leg readies to react; foot grounds firmly
+wave a goodbye; head smiles; hand waves; arm swings up and down; hip stays still; leg remains stationary; foot planted
+chase someone; head focuses on target; hand clenches; arm pumps; hip propels forward; leg runs; foot sprints
+comfort someone; head tilts empathetically; hand pats back; arm wraps around; hip leans in; leg steps closer; foot steadies
+drag someone; head determines direction; hand grips firmly; arm pulls; hip backs movement; leg steps back; foot drags
+sweep the floor; head watches area; hand holds broom; arm sweeps; hip sways with strokes; leg steps with motion; foot shifts
+mop the floor; head looks at dirty spots; hand wrings mop; arm scrubs; hip leans into motion; leg steps along; foot pivots
+bounce the ball; head tracks ball; hand dribbles; arm controls bounce; hip aligns with motion; leg adjusts; foot pivots
+shoot at the basket; head aims at basket; hand releases ball; arm extends in shot; hip pushes forward; leg jumps; foot lifts off
+swing the racket; head focuses on ball; hand grips racket; arm swings forward; hip rotates with swing; leg stabilizes; foot pivots for balance
+leg pressing; head up; hand on handles; arms steady; hip pushes into seat; leg extends on press; foot presses platform
+escape (to survive); head scans for exits; hands push obstacles; arms clear path; hip dodges; leg runs rapidly; foot sprints away
+call for help; head looks around; hand waves or holds phone; arm extended if signaling; hip leans toward safety; leg poised to move; foot steps for attention
+wear a mask; head remains steady; hand positions mask; arm hooks elastic over ears; hip steady; leg stationary; foot planted
+take off a mask; head tilts back slightly; hand grabs mask edge; arm pulls mask off; hip relaxed; leg still; foot steady
+bend arms around someone’s shoulder; head turns to person; hands clasp shoulder; arms wrap around; hip leans in; leg steps closer; foot supports stance
+run; head forward focused; hands clenched or open; arms pump; hip drives forward; legs alternate rapidly; foot pushes off ground
+stab someone with a knife; head targets area; hand grips knife; arm thrusts forward; hip engages for force; leg stabilizes; foot plants firmly
+throw a frisbee; head tracks frisbee path; hand holds frisbee; arm swings outward; hip rotates with throw; leg steps into throw; foot pivots for balance
+carry a carrying pole; head steady; hands grip pole ends; arms balance load; hip adjusts to weight; legs move steadily; foot plants carefully
+use a lever to lift something; head watches leverage point; hand places lever; arm pushes down; hip shifts for effort; leg braces; foot secures on ground
+walk; head looks forward; hands swing or are still; arms by side; hip moves naturally; legs alternate steps; foot lifts and places down
+open an umbrella; head tilts to position; hand slides mechanism; arm extends umbrella; hip slightly bends; leg supports; foot stands firm
+close an umbrella; head watches closure; hand presses mechanism; arm pulls umbrella shut; hip steadies; leg braces; foot plants firmly

@@ -1,0 +1,155 @@
+drink, sip, gulp, swig, chug, quaff, imbibe, ingest, slurp, sup
+eat snacks, munch, nibble, chew, snack on, bite, crunch, graze, devour, consume, gobble
+brush hair, comb, tidy, groom, smooth, style, arrange, sweep, neaten, untangle, straighten
+drop something, let go, release, abandon, discard, lose grip, fall, misplace, slip, tumble, unload
+pick up something, grab, lift, retrieve, grasp, hoist, scoop, take, snatch, raise, collect
+throw away something, discard, toss, dispose, chuck, dump, fling, jettison, remove, cast off, get rid of
+sit down, seat, settle, rest, perch, squat, take a seat, recline, crouch, plop down, park oneself
+stand up, rise, get up, straighten, elevate, erect, spring up, ascend, position oneself, jump up, brace
+applaud, clap, cheer, commend, praise, laud, salute, celebrate, acclaim, approve, express admiration
+read, peruse, skim, browse, study, scan, decipher, review, digest, pore over, interpret
+write, scribble, jot, note, draft, inscribe, pen, scrawl, compose, type
+put on a coat, wear, don, slip into, wrap in, dress in, pull on, button up, drape, throw on
+take off a coat, remove, doff, shed, strip off, unbutton, take down, shrug off, pull off, peel off
+put on glasses, wear, don, slip on, adjust, place, fit, position, sport, secure
+take off glasses, remove, doff, take down, strip off, unclip, peel off, pull off, release, shed
+put on a hat, wear, don, slip on, fit, cover, place, cap, adjust, sport
+take off a hat, remove, doff, uncover, pull off, strip off, shed, take down, uncap, lift
+throw away a hat, discard, toss, dispose, fling, jettison, chuck, cast off, dump, get rid of, remove
+cheer, shout, applaud, encourage, exclaim, root for, boost, support, hail, chant
+wave hands, gesture, beckon, signal, motion, salute, flap, sway, swing, flutter, wag
+kick something, boot, punt, strike, knock, shove, push, nudge, propel, hit  
+reach into pockets, dig, rummage, feel, search, fish, grab, explore, grope, check  
+jump on single leg, hop, skip, leap, bound, bounce, spring, vault, hurdle, lunge  
+jump on two legs, bounce, leap, spring, hop, bound, jump up, vault, lunge, propel  
+make a phone call, dial, ring, phone, contact, reach out, call up, talk, connect, buzz  
+play with cell phones, tap, swipe, scroll, type, text, browse, check, flick, press, interact  
+point somewhere, indicate, gesture, signal, direct, show, motion, guide, mark, highlight  
+look at the watch, glance, check, observe, view, regard, monitor, peer, track, scrutinize  
+rub hands, scrub, massage, knead, clasp, wring, stroke, polish, caress, rub together  
+bow, bend, incline, nod, stoop, bow down, duck, lean, submit, curtsy, genuflect
+shake head, nod no, turn, swivel, twist, wag, shake side to side, bob, rotate, move, jerk
+salute, honor, greet, acknowledge, signal, wave, hail, respect, pay homage, bow
+cross palms together, clasp, join, press, hold, fold, connect, align, bring together, unite
+cross arms in front to say no, block, guard, fold, close, deny, resist, shield, reject, oppose
+wear headphones, don, put on, adjust, fit, place, secure, slip on, cover ears, position
+take off headphones, remove, doff, unplug, strip, take down, unclip, shed, pull off, set aside
+make a shh sign, hush, silence, quieten, gesture silence, signal, shush, put finger to lips, mute, calm
+touch the hair, stroke, caress, run fingers through, smooth, pat, brush, adjust, groom, feel
+thumb up, approve, signal yes, gesture approval, raise thumb, give a thumbs-up, acknowledge, commend, support, agree
+thumb down, disapprove, reject, signal no, gesture disapproval, lower thumb, dislike, deny, disagree, dismiss, oppose
+make an OK sign, gesture okay, signal approval, form circle with fingers, signal OK, show O sign, make hand circle, form a ring, gesture alright, approve with hand, give OK sign  
+make a victory sign, V sign, peace sign, two-finger salute, flash V, gesture peace, raise two fingers, signal victory, show V, make peace gesture, signal triumph
+punch with fists, strike, hit, jab, pound, knock, thrust, swing, hammer, bash, thump
+figure snap, click fingers, snap fingers, flick fingers, crack fingers, pop fingers, click, tap fingers, make a snapping sound, flick snap, finger pop
+open the bottle, unscrew, uncork, twist open, uncap, pry open, pop the top, remove lid, pull off cap, twist lid, crack open
+smell, sniff, inhale, scent, breathe in, take a whiff, catch scent, detect odor, whiff, take in
+squat, crouch, sit low, hunker, lower down, bend knees, sit on heels, stoop, get low, duck down
+apply cream to face, rub, spread, smooth, massage, dab, pat, smear, lather, coat, moisturize
+apply cream to hands, rub, spread, massage, smear, smooth, pat, lather, moisturize, coat, cover
+grasp a bag, hold, clutch, grip, carry, seize, grab, lift, take, handle, clasp
+put down a bag, place, set down, drop, release, lay down, put aside, position, leave, lower, rest
+put something into a bag, pack, insert, place in, stuff, load, stash, store, drop in, fill, slip into
+take something out of a bag, remove, extract, pull out, take out, retrieve, unload, unbag, withdraw, dig out, empty
+open a box, unbox, lift lid, unpack, pry open, crack open, unseal, unlock, unveil, expose, pull open
+move a box, carry, lift, transport, shift, relocate, drag, push, pull, slide, hoist
+put up hands, raise hands, lift, elevate, hold up, surrender, gesture up, throw up hands, signal, bring up, thrust up
+put hands on hips, rest hands, place hands, hold waist, settle hands, position hands, akimbo, clasp hips, grip waist, grasp sides, stand firm
+wrap arms around, embrace, hug, hold, encircle, clasp, enfold, cuddle, grasp, clutch, grip
+shake arms, wave arms, flap, swing, thrash, wiggle, flick, tremble, jerk, jostle, vibrate
+step on the spot walk, march in place, walk on spot, tread in place, step in place, march, move feet, shift on spot, tread lightly, tap feet, shuffle
+kick aside, shove, push away, boot, punt to the side, knock aside, flick, swipe, flick away, thrust away, nudge
+kick backward, back kick, punt backward, thrust back, boot back, flick back, push behind, shove backward, knock behind, swing leg back, flick backward
+cough, hack, clear throat, wheeze, expel air, bark, choke, rasp, sputter, gasp
+sneeze, achoo, expel air, blow, snuff, shoot air, sniffle, erupt, snort, blast
+yawn, stretch mouth, gape, open wide, sigh, inhale deeply, exhale deeply, expand jaw, breathe out, stretch
+blow nose, clear nose, expel mucus, sniff, wipe nose, clear sinuses, blow air, snort, empty nostrils, wipe face  
+stagger, stumble, totter, lurch, sway, wobble, falter, reel, teeter, limp
+headache, migraine, head pain, tension, throbbing head, ache, pounding head, dull pain, headache pressure, cranial discomfort
+chest discomfort, tightness, pain in chest, chest pressure, chest ache, chest tension, difficulty breathing, unease in chest, squeezing sensation, chest cramp
+backache, lumbar pain, back pain, sore back, strained back, aching spine, tension in back, spinal discomfort, stiff back, back twinge
+neck-ache, stiff neck, cervical pain, sore neck, neck strain, neck discomfort, neck stiffness, aching neck, tight neck, neck soreness  
+vomit, throw up, puke, regurgitate, spew, heave, retch, disgorge, expel, hurl
+use a fan, cool down, operate fan, turn on fan, blow air, circulate air, oscillate fan, switch on fan, fan oneself, adjust fan
+stretch body, extend, lengthen, flex, loosen, elongate, reach, expand, straighten, warm up
+punching someone, strike, hit, jab, knock, thump, bash, pound, slug, smack, sock
+kicking someone, boot, punt, strike with foot, knock, shove, thrust, flick, push, drive foot into, bash with foot
+pushing someone, shove, thrust, force, nudge, propel, jostle, press, drive, knock over
+slap someone on the back, pat, hit, clap, smack, thump, tap, pound, whack, strike, tap on back
+point someone, indicate, gesture at, direct, signal towards, show, motion at, mark, guide, draw attention to, gesture towards
+hug, embrace, cuddle, hold, clasp, squeeze, wrap arms, enfold, grip, clutch
+give something to someone, hand over, pass, offer, present, deliver, transfer, extend, provide, bestow, grant
+steal something from other’s pocket, pickpocket, swipe, lift, snatch, pilfer, filch, pinch, purloin, nick, rob
+rob something from someone, mug, snatch, seize, take by force, plunder, steal, grab, loot, thieve, hold up
+shake hands, greet, clasp hands, grip, grasp, hold hands, shake, exchange handshakes, squeeze hands, grasp hands
+walk toward someone, approach, move closer, advance, step forward, come near, head towards, draw near, close in, proceed to, stride to
+walk away from someone, depart, leave, move away, retreat, step back, turn away, distance, withdraw, exit, back off
+hit someone with something, strike, smack, bash, whack, club, pound, knock, slam, thump, batter
+threat someone with a knife, menace, intimidate, brandish, coerce, scare, terrorize, frighten, warn, bully, threaten harm
+bump into someone, collide, run into, jostle, knock into, brush against, crash into, hit, stumble into, smack into
+walk side by side, accompany, stride alongside, walk together, move in step, pace together, stroll together, walk in tandem, march together, keep pace, walk abreast
+high five, slap hands, give five, hand slap, palm tap, smack hands, hit hands, clap hands, high slap, hand clap, touch palms
+drink a toast, raise a glass, clink glasses, propose a toast, cheer, salute, make a toast, celebrate with a drink, sip in honor, drink in celebration
+move something with someone, lift together, carry together, transport with help, shift jointly, push together, relocate together, haul with assistance, drag together, transfer jointly
+take a phone for someone, grab phone, fetch phone, pick up phone, retrieve phone, hold phone, pass phone, hand over phone, carry phone, collect phone, present phone  
+stalk someone, follow secretly, shadow, trail, track, spy on, pursue, tail, hunt, creep up on, observe stealthily
+whisper in someone’s ear, murmur, speak softly, hiss quietly, mutter, talk quietly, breathe words, speak in low tones, confide quietly, say softly, speak in hushed tones
+exchange something with someone, trade, swap, barter, switch, hand over, share, give and take, reciprocate, transfer, interchange
+lend an arm to support someone, assist, help, give a hand, offer support, steady, hold up, guide, prop up, aid, give physical support
+rock-paper-scissors, roshambo, play hand game, choose between rock-paper-scissors, hand gesture game, paper-rock-scissors, make a hand choice, decide with hand gestures, game of hands, rock-paper-scissors match
+hover, float, stay aloft, suspend, stay above, hang in the air, remain in position, drift, poise, stay airborne, linger above
+land, touch down, arrive, settle, alight, make contact, come down, descend, arrive on ground, reach the ground
+land at designated locations, land precisely, touch down on spot, arrive at set location, reach exact point, hit target landing, descend at specific place, arrive at pre-set spot, land at marked site, come down accurately, hit assigned landing
+move forward, advance, proceed, step ahead, push forward, march, go ahead, move onward, head forward, move ahead
+move backward, retreat, step back, reverse, withdraw, backpedal, move in reverse, pull back, step in reverse, recoil
+move left, shift left, veer left, turn left, step left, sidestep left, move to the left, drift left, edge left, lean left, slide left
+move right, shift right, veer right, turn right, step right, sidestep right, move to the right, drift right, edge right, lean right, slide right
+ascend, rise, climb, go up, move upward, elevate, soar, lift, gain altitude, scale up
+descend, drop, fall, go down, move downward, lower, decline, sink, dip, glide down
+accelerate, speed up, quicken, gain speed, pick up pace, hasten, go faster, move quicker, increase speed, advance rapidly
+decelerate, slow down, reduce speed, brake, ease off, lessen speed, decrease speed, slacken, pull back, go slower
+come over here, approach, move closer, get over here, come toward, head this way, advance this direction, step over, walk here, come closer
+stay where you are, remain still, hold position, stay put, freeze, don't move, keep your place, maintain position, stay in place, stand by
+rear right turn, turn right behind, rotate right backward, veer right from rear, shift right in reverse, swing back right, rotate to the right behind, swivel right backward, pivot right in reverse
+rear left turn, turn left behind, rotate left backward, veer left from rear, shift left in reverse, swing back left, rotate to the left behind, swivel left backward, pivot left in reverse
+abandon landing, abort landing, stop descent, cancel landing, pull up from landing, terminate landing, cease touchdown, halt approach, discontinue landing, call off landing
+all clear, safe, go ahead, good to go, proceed, green light, no danger, okay to move, all set, no obstacles
+not clear, unsafe, hold position, danger present, proceed with caution, hold, warning, do not go, stop, blocked, potential hazard
+have command, take control, assume authority, lead, be in charge, take over, direct, guide, oversee, manage
+follow me, come with me, walk with me, move after me, trail behind, walk in step, go after me, keep up, stay behind, follow my lead
+turn left, veer left, move left, swing left, shift left, go left, rotate left, pivot left, steer left, angle left
+turn right, veer right, move right, swing right, shift right, go right, rotate right, pivot right, steer right, angle right
+throw litter, toss trash, discard, chuck waste, drop garbage, dump refuse, fling rubbish, scatter debris, dispose carelessly, litter
+dig a hole, excavate, burrow, scoop, tunnel, remove dirt, shovel, hollow out, delve, create a pit
+mow, cut grass, trim, clip, shear, cut down, level, slash, whack, groom lawn
+set on fire, ignite, torch, burn, inflame, kindle, light up, blaze, combust, incinerate
+smoke, puff, inhale, exhale, drag, take a drag, smoke a cigarette, blow smoke, light up, vape
+cut the tree, chop, fell, saw, prune, hack, slice, trim, lop off, sever, slash
+fishing, angling, casting, catching fish, hooking, rod fishing, fly fishing, trawling, netting, baiting
+pick a lock, unlock, jimmy, bypass, crack a lock, force open, pry open, tamper with lock, break in, manipulate lock
+pollute walls, deface, mark, graffiti, scribble, stain, vandalize, dirty, soil, spoil
+hold someone hostage, capture, seize, kidnap, detain, confine, imprison, keep captive, restrain, take hostage
+threat someone with a gun, menace, intimidate, coerce, scare, frighten, terrorize, aim gun, brandish weapon, bully, point gun at
+wave a goodbye, bid farewell, gesture farewell, signal goodbye, raise hand in farewell, wave off, say goodbye, beckon, motion a goodbye, wave hand
+chase someone, pursue, follow, run after, hunt down, trail, track, tail, go after, hound, stalk
+comfort someone, console, soothe, reassure, calm, ease, support, pacify, alleviate, offer solace, cheer up
+drag someone, pull, haul, tug, yank, tow, draw, heave, jerk, trail, move forcefully
+sweep the floor, clean, broom, brush, dust, tidy, clear, scrub, wipe, sweep up, clean floor
+mop the floor, wipe, swab, clean, wash, scrub, shine, tidy, sweep with water, sponge, soak
+bounce the ball, dribble, rebound, toss, throw, ricochet, deflect, toss back, rebound the ball, hit ball, tap
+shoot at the basket, aim, fire, throw, score, shoot a shot, aim for basket, toss at hoop, make a basket, attempt a shot
+swing the racket, hit, strike, swipe, smash, whack, flick, bat, lob, knock, swat
+leg pressing, push with legs, exert force with legs, press down, drive with legs, lift with legs, flex legs, leg thrust, leg push, extend legs, apply pressure with legs
+escape (to survive), flee, run away, evade, get away, break free, slip away, make a getaway, dodge, elude, abscond
+call for help, shout for aid, scream for assistance, cry for help, signal for rescue, plead for help, ask for assistance, call out, yell for support, seek help
+wear a mask, put on a mask, don a mask, cover face, slip on mask, secure mask, place mask, mask up, pull on a mask, adjust mask
+take off a mask, remove mask, doff mask, unmask, peel off mask, pull off mask, strip mask, uncover face, take down mask, lift mask
+bend arms around someone’s shoulder, hug, embrace, drape arms, put arm around, wrap arm, clasp shoulder, place arm around, link arms, encircle shoulder, hold shoulder
+run, sprint, jog, dash, race, hurry, move fast, gallop, charge, rush
+stab someone with a knife, pierce, impale, thrust, jab, lunge, puncture, slice, cut, slash, wound
+throw a frisbee, fling, toss, hurl, launch, chuck, pitch, lob, cast, sling, send flying
+carry a carrying pole, shoulder pole, lift with pole, balance load, bear with pole, support with pole, hold pole, transport with pole, hoist, haul, carry load
+use a lever to lift something, pry, leverage, lift with force, raise with lever, heave, hoist with lever, pull up, move with lever, prop up, elevate with lever
+walk, stroll, stride, saunter, march, step, amble, pace, hike, tread
+open an umbrella, unfold, pop open, extend, deploy, raise, unfurl, spread out, expand, flip open, unlock
+close an umbrella, fold, collapse, shut, retract, compact, bundle, contract, draw in, pack up, latch

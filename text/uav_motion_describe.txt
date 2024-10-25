@@ -1,0 +1,155 @@
+drink;Hand moves to mouth as elbow bends, holding a cup
+eat snacks;Fingers grasp food, bringing it to the mouth
+brush hair;Arm moves over head, hand holding brush
+drop something;Fingers release object, which falls downward
+pick up something;Body bends at hips; hand reaches towards object
+throw away something;Arm swings forward, releasing object into bin
+sit down;Hips bend, lowering body onto seat
+stand up;Legs straighten, lifting body from seated position
+applaud;Palms come together repeatedly in front of body
+read;Eyes scan, hand holds and turns pages
+write;Hand scribbles on paper with a pen or pencil
+put on a coat;Arms slide into sleeves, body twists to adjust fit
+take off a coat;Arms withdraw from sleeves, coat removed from body
+put on glasses;Glasses lifted to face, arms hook over ears
+take off glasses;Glasses removed from face, arms unhook
+put on a hat;Hand places hat on top of head
+take off a hat;Hand removes hat from head
+throw away a hat;Arm tosses hat into a receptacle
+cheer;Arms raised high, voice shouts joyfully
+wave hands;Arms swing side to side, hands rotating
+kick something;Leg swings forward, foot aiming at object
+reach into pockets;Hand slides into pocket, searching inside
+jump on single leg;One leg bends for leap, other swings for balance
+jump on two legs;Both knees bend, body propels upward
+make a phone call;Hand holds phone to ear, mouth speaks
+play with cell phones;Fingers swipe or tap on phone screen
+point somewhere;Arm extends out, finger directing towards location
+look at the watch;Arm lifts, eyes glance at wristwatch
+rub hands;Palms rub together back and forth
+bow;Upper body leans forward, bending at the waist
+shake head;Head moves side to side, indicating 'no'
+salute;Hand rises to forehead, palm facing down
+cross palms together;Hands clasp together in front of body
+cross arms in front to say no;Arms fold over chest, signaling 'no'
+wear headphones;Headphones placed over ears, hands adjust
+take off headphones;Hands remove headphones from ears
+make a shh sign;Finger presses to lips, signaling silence
+touch the hair;Hand moves through hair, fingers combing
+thumb up;Thumb points upward, indicating approval
+thumb down;Thumb points downward, indicating disapproval
+make an OK sign;Thumb and index finger form a circle, other fingers extended
+make a victory sign;Index and middle fingers raised, forming a 'V'
+punch with fists;Arm extends forward, fist clenched tightly
+figure snap;Middle finger snaps against thumb, producing sound
+open the bottle;Hand twists cap, other hand secures bottle
+smell;Nose moves close to object, inhaling deeply
+squat;Hips lower, bending knees, keeping heels on ground
+apply cream to face;Fingers dab cream on face, spreading gently
+apply cream to hands;Cream smeared across palms, rubbing together
+grasp a bag;Hand wraps around bag handle, lifting
+put down a bag;Hand releases bag, placing it down
+put something into a bag;Hand places object into bag's opening
+take something out of a bag;Hand retrieves object from bag
+open a box;Fingers lift lid or tear open flap of box
+move a box;Hands grip box sides, relocating it
+put up hands;Arms raise, hands lifting above head
+put hands on hips;Hands press on hips, elbows out
+wrap arms around;Arms encircle, hugging or holding tight
+shake arms;Arms extended, shaking loosely from shoulders
+step on the spot walk;Feet step in place, mimicking walking movement
+kick aside;Foot swings out to side, nudging object away
+kick backward;Leg thrusts back sharply, targeting behind
+cough;Chest contracts, expelling air forcefully from lungs
+sneeze;Sudden, forceful expulsion of air from nose and mouth
+yawn;Mouth opens wide, deep inhale followed by exhale
+blow nose;Handkerchief held to nose, blowing forcefully
+stagger;Unsteady steps, swaying side to side while walking
+headache;Hand presses against forehead, indicating pain
+chest discomfort;Hand clutches at chest, face showing distress
+backache;Hand rubs lower back, signifying pain
+neck-ache;Hand massages neck, tilting head to alleviate pain
+vomit;Body hunches over, expelling contents from stomach
+use a fan;Hand waves fan back and forth, creating air flow
+stretch body;Arms and legs extend out, elongating the torso
+punching someone;Fist drives forward towards another person
+kicking someone;Leg lifts and thrusts into another person
+pushing someone;Hands extend, applying force to another person
+slap someone on the back;Open hand strikes another's back in gesture
+point someone;Finger aims directly at another individual
+hug;Arms wrap around another, pulling them close
+give something to someone;Item passes from one hand to another's
+steal something from other’s pocket;Hand sneaks into another's pocket, taking items secretly
+rob something from someone;Forcefully taking something from someone
+shake hands;Hands clasp, moving up and down in greeting
+walk toward someone;Steps advance, closing distance to another person
+walk away from someone;Turn back, increasing distance from another person
+hit someone with something;Object in hand brought down forcefully onto another
+threaten someone with a knife;Knife held menacingly towards another person
+bump into someone;Body collides unintentionally with another's
+walk side by side;Two people move forward with shoulders aligned
+high five;Palms smack together above head level in celebration
+drink a toast;Glasses raised and clinked before drinking
+move something with someone;Two people together shift an object from one place to another
+take a phone for someone;Reach out to answer or hand over a telephone to another
+stalk someone;Follow another person quietly and persistently
+whisper in someone’s ear;Mouth close to another's ear, speaking softly
+exchange something with someone;Items swapped between two hands
+lend an arm to support someone;Offer an arm for another to grasp for stability
+rock-paper-scissors;Hands form symbols in game gesture
+hover;Remain stationary in the air at one spot
+land;Descend from air to ground smoothly
+land at designated locations;Precisely reach a specific ground spot from the air
+move forward;Progress straight ahead
+move backward;Retreat in the direction opposite to facing
+move left;Shift position to the left side
+move right;Shift position to the right side
+ascend;Move upward into the air
+descend;Lower oneself from air to ground
+accelerate;Increase speed or velocity
+decelerate;Decrease speed or velocity
+come over here;Gesturing with hand to approach, beckoning someone closer
+stay where you are;Hand up, signaling to halt position and not move
+rear right turn;Pivot towards the right, moving the back end around
+rear left turn;Pivot towards the left, moving the back end around
+abandon landing;Signal given to halt descent and abort touchdown
+all clear;Thumbs-up or a wave indicating absence of danger or obstacles
+not clear;Hands crossed or waving to signal presence of danger or hindrance
+have command;Firm posture taken with authoritative gesture, taking charge
+follow me;Hand motioning behind, leading others in the same direction
+turn left;Point or motion to the left, indicating a directional change
+turn right;Point or motion to the right, indicating a directional change
+throw litter;Discard trash carelessly, tossing it away from oneself
+dig a hole;Shovel or hands excavate dirt, creating a pit
+mow;Pushing a lawn mower, cutting grass to a uniform level
+set on fire;Igniting an object, causing it to burn and flame
+smoke;Inhaling and exhaling smoke from a combustible material
+cut the tree;Sawing or chopping motion made against a tree trunk
+fishing;Casting line into water, waiting to catch fish
+pick a lock;Manipulating lock mechanism with tools, attempting to open
+pollute walls;Defacing walls with substances or markings
+hold someone hostage;Detain a person, restricting their freedom with a threat
+threat someone with a gun;Pointing a firearm at someone as an intimidation
+wave a goodbye;Hand waving side to side, signaling departure
+chase someone;Running after a person with intent to catch or follow
+comfort someone;Offering a reassuring touch or embrace to soothe another
+Drag someone;Both arms pull on another person as legs step backward
+Sweep the floor;One hand holds a broom's end as the other supports the middle
+Mop the floor;Arms push and pull the mop; torso bends and straightens
+Bounce the ball;One hand repeatedly taps the ball towards the ground
+Shoot at the basket;Arms extend upward, flicking wrists to propel the ball
+Swing the racket;One arm swings the racket across the body in an arc
+Leg pressing;Lying down, legs push against weights away from the body
+Escape (to survive);Various body parts move frantically to avoid danger
+Call for help;Arms wave overhead as the voice is projected loudly
+Wear a mask;Hands bring the mask to the face, securing it over the nose and mouth
+Take off a mask;Fingers hook under the mask's edges and pull away from the face
+Bend arms around someone’s shoulder;Arms curve to draw another person close
+Run;Legs alternate in forward strides as arms swing in rhythm
+Stab someone with a knife;One arm thrusts forward sharply holding the knife
+Throw a frisbee;One arm extends and snaps forward releasing the frisbee
+Carry a carrying pole;Shoulders support the pole's ends, arms balance it
+Use a lever to lift something;Arms push or pull the lever, pivoting on a fulcrum
+Walk;Legs take alternating steps while arms swing gently
+Open an umbrella;One hand slides up the shaft as the other supports the base
+Close an umbrella;Arms pull down on the umbrella, collapsing its canopy
