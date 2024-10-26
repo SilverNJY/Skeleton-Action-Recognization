@@ -45,7 +45,7 @@ skeleton-acton-det
 ## 训练好的模型目录:
  ```
  - work_dir/ctrgcn
-      -joint/best.pt
+      -k1/k1_best.pt
   ...
 ```
 
@@ -72,13 +72,13 @@ The main environment configuration is as follows,
 
 ```
 # Example1: 在比赛数据集上训练joint模态
-CUDA_VISIBLE_DEVICES=0 python train.py --config config/ctrgcn/joint.yaml --model model.ctrgcn.Model_lst_4part_uav --work-dir work_dir/custom/lst_joint --device 0 --log-interval 5 --save-interval 1
+CUDA_VISIBLE_DEVICES=0 python train.py --config config/ctrgcn/k8.yaml --model model.ctrgcn.Model_lst_4part_uav --work-dir work_dir/custom/k8 --device 0 --log-interval 5 --save-interval 1
 ```
 
 
 ### 组合四种模态
 ```
-# Example: 在官方数据集上组合四种模态进行测试
+# Example: 在官方数据集上组合模型与模态进行测试
 python ensemble.py
 ```
 
@@ -94,7 +94,7 @@ python infer.py
 ## 各模态的训练日志目录
 ```
 - work_dir/ctrgcn
-  - bone
-    - log_bone.txt
+  - k1
+    - log.txt
   ...
 ```
