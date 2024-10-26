@@ -4,7 +4,7 @@
 skeleton-acton-det
 │  ensemble.py
 │  **environment.yml**
-│  KLLoss.py
+│  loss.py
 │  LICENSE
 │  **main_multipart_uav.py**
 │  README.md
