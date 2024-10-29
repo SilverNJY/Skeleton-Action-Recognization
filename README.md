@@ -86,15 +86,28 @@ python ensemble.py
 ### 测试
 
 ```
+#产生置信度文件pred.npy
 python infer.py
 
 ```
 
 
-## 各模态的训练日志目录
+## 训练的最好权重以及日志
 ```
 - work_dir/ctrgcn
   - k1
+    - k1_best.pt
     - log.txt
+  ...
+```
+
+## 模型的置信度文件
+```
+- results
+  - ctrgcn
+    - k1
+      - A.npy
+      - B.npy
+    ...
   ...
 ```
