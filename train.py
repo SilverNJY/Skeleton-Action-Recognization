@@ -84,14 +84,14 @@ def get_parser():
     )
     parser.add_argument(
         "--work-dir",
-        default="./work_dir/",
+        default="./work_dir/uav",
         help="the work folder for storing results",
     )
 
     parser.add_argument("-model_saved_name", default="")
     parser.add_argument(
         "--config",
-        default="./config/ctrgcn/k8.yaml",
+        default="./config/ctrgcn/k1.yaml",
         help="path to the configuration file",
     )
 
@@ -148,7 +148,7 @@ def get_parser():
     parser.add_argument(
         "--num-worker",
         type=int,
-        default=32,
+        default=1,
         help="the number of worker for data loader",
     )
     parser.add_argument(
@@ -172,6 +172,8 @@ def get_parser():
     parser.add_argument(
         "--weights", default=None, help="the weights for network initialization"
     )
+    parser.add_argument("--wrapper", default=None, help="the model will be used")
+    parser.add_argument("--wrapper_args", default=dict(), help="the arguments of model")
     parser.add_argument(
         "--ignore-weights",
         type=str,
@@ -179,19 +181,45 @@ def get_parser():
         nargs="+",
         help="the name of weights which will be ignored in the initialization",
     )
-    parser.add_argument('--cl-mode', choices=['ST-Multi-Level'], default=None,
-                        help='mode of Contrastive Learning Loss')
-    parser.add_argument('--cl-version', choices=['V0', 'V1', 'V2', "NO FN", "NO FP", "NO FN & FP"], default='V0',
-                        help='different way to calculate the cl loss')
-    parser.add_argument('--pred_threshold', type=float, default=0.0, help='threshold to define the confident sample')
-    parser.add_argument('--use_p_map', type=str2bool, default=True,
-                        help='whether to add (1 - p_{ik}) to constrain the auxiliary item')
-    parser.add_argument('--start-cl-epoch', type=int, default=-1, help='epoch to optimize cl loss')
-    parser.add_argument('--w-cl-loss', type=float, default=0.1, help='weight of cl loss')
-    parser.add_argument('--w-multi-cl-loss', type=float, default=[0.1, 0.2, 0.5, 1], nargs='+',
-                        help='weight of multi-level cl loss')
-    parser.add_argument('--lambda_1', type=float, default=1e-4)
-    parser.add_argument('--lambda_2', type=float, default=1e-1)
+    parser.add_argument(
+        "--cl-mode",
+        choices=["ST-Multi-Level"],
+        default=None,
+        help="mode of Contrastive Learning Loss",
+    )
+    parser.add_argument(
+        "--cl-version",
+        choices=["V0", "V1", "V2", "NO FN", "NO FP", "NO FN & FP"],
+        default="V0",
+        help="different way to calculate the cl loss",
+    )
+    parser.add_argument(
+        "--pred_threshold",
+        type=float,
+        default=0.0,
+        help="threshold to define the confident sample",
+    )
+    parser.add_argument(
+        "--use_p_map",
+        type=str2bool,
+        default=True,
+        help="whether to add (1 - p_{ik}) to constrain the auxiliary item",
+    )
+    parser.add_argument(
+        "--start-cl-epoch", type=int, default=-1, help="epoch to optimize cl loss"
+    )
+    parser.add_argument(
+        "--w-cl-loss", type=float, default=0.1, help="weight of cl loss"
+    )
+    parser.add_argument(
+        "--w-multi-cl-loss",
+        type=float,
+        default=[0.1, 0.2, 0.5, 1],
+        nargs="+",
+        help="weight of multi-level cl loss",
+    )
+    parser.add_argument("--lambda_1", type=float, default=1e-4)
+    parser.add_argument("--lambda_2", type=float, default=1e-1)
 
     # optim
     parser.add_argument(
@@ -236,7 +264,10 @@ def get_parser():
     parser.add_argument("--warm_up_epoch", type=int, default=0)
     parser.add_argument("--loss-alpha", type=float, default=0.8)
     parser.add_argument("--te-lr-ratio", type=float, default=1)
-
+    parser.add_argument("--use_prompt", type=float, default=True)
+    parser.add_argument("--use_ab", type=float, default=False)
+    parser.add_argument("--loss", default="CrossEntropy", help="the loss will be used")
+    parser.add_argument("--loss_args", default=dict(), help="the arguments of loss")
     return parser
 
 
@@ -321,33 +352,23 @@ class Processor:
         self.output_device = output_device
         Model = import_class(self.arg.model)
         shutil.copy2(inspect.getfile(Model), self.arg.work_dir)
-        # print(Model)
-        self.model = Model(**self.arg.model_args)
-        # print(self.model)
-        self.loss_ce = MultiClassFocalLossWithAlpha(num_class=155).cuda(output_device)
-        # mem_size = self.data_loader['train'].dataset.__len__() if self.arg.phase == 'train' else 0    
-        # label_all = (
-        #     self.data_loader["train"].dataset.label if self.arg.phase == "train" else []
-        # )
-        # self.graphContrast = InfoNCEGraph(
-        #     in_channels=3 * 17 * 17,
-        #     out_channels=256,
-        #     class_num=self.arg.model_args["num_class"],
-        #     mem_size=mem_size,
-        #     label_all=label_all,
-        #     T=0.8,
-        # ).cuda(output_device)
+        if self.arg.wrapper:
+            Wrapper = import_class(self.arg.wrapper)
+            self.model = Wrapper(Model(**self.arg.model_args), **self.arg.wrapper_args)
+        else:
+            self.model = Model(**self.arg.model_args)
+        self.loss = get_loss_func(self.arg.loss, self.arg.loss_args).cuda(output_device)
+        self.CEloss4test = get_loss_func("CrossEntropy", None).cuda(output_device)
         self.klloss = KLLoss().cuda(output_device)
-
         self.model_text_dict = nn.ModuleDict()
-
-        for name in self.arg.model_args["head"]:
-            model_, preprocess = clip.load(name, device)
-            # model_, preprocess = clip.load('ViT-L/14', device)
-            del model_.visual
-            model_text = TextCLIP(model_)
-            model_text = model_text.cuda(self.output_device)
-            self.model_text_dict[name] = model_text
+        if self.arg.use_prompt:
+            for name in self.arg.model_args["head"]:
+                model_, preprocess = clip.load(name, device)
+                # model_, preprocess = clip.load('ViT-L/14', device)
+                del model_.visual
+                model_text = TextCLIP(model_)
+                model_text = model_text.cuda(self.output_device)
+                self.model_text_dict[name] = model_text
 
         if self.arg.weights:
             self.global_step = int(arg.weights[:-3].split("-")[-1])
@@ -483,73 +504,83 @@ class Processor:
             with torch.cuda.amp.autocast():
                 label_g = gen_label(label)
                 label = label.long().cuda(self.output_device)
-                if self.arg.cl_mode is not None:
-                    output, z, cl_loss, feature_dict, logit_scale, part_feature_list = self.model(data, label, get_cl_loss=True)
+                if self.arg.wrapper:
+                    output, feature_dict, logit_scale, part_feature_list, z1, z2 = (
+                        self.model(data)
+                    )
+                elif self.arg.use_ab:
+                    output = self.model(data)
                 else:
-                    output, z, feature_dict, logit_scale, part_feature_list = self.model(data)
-                # mmd_loss, l2_z_mean, z_mean = get_mmd_loss(
-                #     z, self.model.z_prior, label, 155
-                # )
+                    output, feature_dict, logit_scale, part_feature_list = self.model(
+                        data
+                    )
                 loss_txt = None
-                loss_info = None
                 loss_te_list = []
-                for ind in range(num_text_aug):
-                    if ind > 0:
-                        text_id = np.ones(len(label), dtype=np.int8) * ind
-                        texts = torch.stack(
-                            [text_dict[j][i, :] for i, j in zip(label, text_id)]
-                        )
-                        texts = texts.cuda(self.output_device)
+                if self.arg.use_prompt:
+                    for ind in range(num_text_aug):
+                        if ind > 0:
+                            text_id = np.ones(len(label), dtype=np.int8) * ind
+                            texts = torch.stack(
+                                [text_dict[j][i, :] for i, j in zip(label, text_id)]
+                            )
+                            texts = texts.cuda(self.output_device)
 
+                        else:
+                            texts = list()
+                            for i in range(len(label)):
+                                text_len = len(text_list[label[i]])
+                                text_id = np.random.randint(text_len, size=1)
+                                text_item = text_list[label[i]][text_id.item()]
+                                texts.append(text_item)
+
+                            texts = torch.cat(texts).cuda(self.output_device)
+
+                        text_embedding = self.model_text_dict[
+                            self.arg.model_args["head"][0]
+                        ](texts).float()
+
+                        if ind == 0:
+                            logits_per_image, logits_per_text = create_logits(
+                                feature_dict[self.arg.model_args["head"][0]],
+                                text_embedding,
+                                logit_scale[:, 0].mean(),
+                            )
+
+                            ground_truth = torch.tensor(
+                                label_g,
+                                dtype=feature_dict[
+                                    self.arg.model_args["head"][0]
+                                ].dtype,
+                                device=device,
+                            )
+                        else:
+                            logits_per_image, logits_per_text = create_logits(
+                                part_feature_list[ind - 1],
+                                text_embedding,
+                                logit_scale[:, ind].mean(),
+                            )
+
+                            ground_truth = torch.tensor(
+                                label_g,
+                                dtype=part_feature_list[ind - 1].dtype,
+                                device=device,
+                            )
+                        loss_texts = self.klloss(logits_per_text, ground_truth)
+                        loss_imgs = self.klloss(logits_per_image, ground_truth)
+                        loss_te_list.append((loss_imgs + loss_texts) / 2)
+                    loss_txt = (
+                        self.arg.loss_alpha * sum(loss_te_list) / len(loss_te_list)
+                    )
+                    if self.arg.wrapper:
+                        loss_ce = self.loss((output, z1, z2), label)
                     else:
-                        texts = list()
-                        for i in range(len(label)):
-                            text_len = len(text_list[label[i]])
-                            text_id = np.random.randint(text_len, size=1)
-                            text_item = text_list[label[i]][text_id.item()]
-                            texts.append(text_item)
-
-                        texts = torch.cat(texts).cuda(self.output_device)
-
-                    text_embedding = self.model_text_dict[
-                        self.arg.model_args["head"][0]
-                    ](texts).float()
-
-                    if ind == 0:
-                        logits_per_image, logits_per_text = create_logits(
-                            feature_dict[self.arg.model_args["head"][0]],
-                            text_embedding,
-                            logit_scale[:, 0].mean(),
-                        )
-
-                        ground_truth = torch.tensor(
-                            label_g,
-                            dtype=feature_dict[self.arg.model_args["head"][0]].dtype,
-                            device=device,
-                        )
-                    else:
-                        logits_per_image, logits_per_text = create_logits(
-                            part_feature_list[ind - 1],
-                            text_embedding,
-                            logit_scale[:, ind].mean(),
-                        )
-
-                        ground_truth = torch.tensor(
-                            label_g,
-                            dtype=part_feature_list[ind - 1].dtype,
-                            device=device,
-                        )
-
-                    loss_imgs = self.klloss(logits_per_image, ground_truth)
-                    loss_texts = self.klloss(logits_per_text, ground_truth)
-
-                    loss_te_list.append((loss_imgs + loss_texts) / 2)
-
-                loss_ce = self.loss_ce(output, label)
-                loss_txt = self.arg.loss_alpha * sum(loss_te_list) / len(loss_te_list)
-                loss = (
-                    loss_ce + loss_txt)
-                        
+                        loss_ce = self.loss(output, label)
+                    loss = loss_ce + loss_txt
+                elif self.arg.use_ab:
+                    loss = sum([self.loss(out, label) for out in output[0]])
+                    output[0] = sum(output[0])
+                else:
+                    loss = self.loss(output, label)
             scaler.scale(loss).backward()
 
             scaler.step(self.optimizer)
@@ -558,7 +589,7 @@ class Processor:
             loss_value.append(loss.data.item())
             timer["model"] += self.split_time()
 
-            value, predict_label = torch.max(output.data, 1)
+            value, predict_label = torch.max(output[0].data, 1)
             acc = torch.mean((predict_label == label.data).float())
             acc_value.append(acc.data.item())
             self.train_writer.add_scalar("acc", acc, self.global_step)
@@ -568,9 +599,20 @@ class Processor:
             self.lr = self.optimizer.param_groups[0]["lr"]
             self.train_writer.add_scalar("lr", self.lr, self.global_step)
             timer["statistics"] += self.split_time()
-            process.set_postfix(
-                {"loss": float(loss.data.item()), "loss_txt":float(loss_txt.data.item()), "lr": float(self.lr)}, refresh=True
-            )
+            if self.arg.use_prompt:
+                process.set_postfix(
+                    {
+                        "loss": float(loss.data.item()),
+                        "loss_txt": float(loss_txt.data.item()),
+                        "lr": float(self.lr),
+                    },
+                    refresh=True,
+                )
+            else:
+                process.set_postfix(
+                    {"loss": float(loss.data.item()), "lr": float(self.lr)},
+                    refresh=True,
+                )
             # statistics of time consumption and loss
         proportion = {
             k: "{:02d}%".format(int(round(v * 100 / sum(timer.values()))))
@@ -623,7 +665,9 @@ class Processor:
             label_list = []
             pred_list = []
             step = 0
-            process = tqdm(self.data_loader[ln], ncols=100, desc=f"Epoch {epoch + 1}", leave=True)
+            process = tqdm(
+                self.data_loader[ln], ncols=100, desc=f"Epoch {epoch + 1}", leave=True
+            )
 
             for batch_idx, (data, label, index) in enumerate(process):
                 label_list.append(label)
@@ -633,12 +677,12 @@ class Processor:
                     data = data.float().cuda(self.output_device)
                     label = label.long().cuda(self.output_device)
                     output, *_ = self.model(data)
-                    loss = self.loss_ce(output, label)
+                    loss = self.CEloss4test(output[0], label)
 
-                    score_frag.append(output.data.cpu().numpy())
+                    score_frag.append(output[0].data.cpu().numpy())
                     loss_value.append(loss.data.item())
 
-                    _, predict_label = torch.max(output.data, 1)
+                    _, predict_label = torch.max(output[0].data, 1)
                     pred_list.append(predict_label.data.cpu().numpy())
                     step += 1
 
@@ -654,8 +698,6 @@ class Processor:
                             )
             score = np.concatenate(score_frag)
             loss = np.mean(loss_value)
-            if "ucla" in self.arg.feeder:
-                self.data_loader[ln].dataset.sample_name = np.arange(len(score))
             accuracy = self.data_loader[ln].dataset.top_k(score, 1)
             if accuracy > self.best_acc:
                 self.best_acc = accuracy
@@ -667,11 +709,7 @@ class Processor:
                 self.val_writer.add_scalar("acc", accuracy, self.global_step)
 
             score_dict = dict(zip(self.data_loader[ln].dataset.sample_name, score))
-            self.print_log(
-                "\tMean {} loss of {} batches: {}.".format(
-                    ln, len(self.data_loader[ln]), np.mean(loss_value)
-                )
-            )
+            self.print_log("\tMean {} loss: {}.".format(ln, np.mean(loss_value)))
             for k in self.arg.show_topk:
                 self.print_log(
                     "\tTop{}: {:.2f}%".format(
