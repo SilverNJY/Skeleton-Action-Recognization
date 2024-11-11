@@ -92,7 +92,7 @@ python infer.py
 ```
 
 
-## 训练的最好权重以及日志
+## 训练的最好权重以及日志（省赛）
 ```
 - work_dir/ctrgcn
   - k1
@@ -101,7 +101,7 @@ python infer.py
   ...
 ```
 
-## 模型的置信度文件
+## 模型的置信度文件（省赛）
 ```
 - results
   - ctrgcn
