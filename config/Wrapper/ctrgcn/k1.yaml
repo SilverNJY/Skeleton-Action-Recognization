@@ -12,7 +12,7 @@ train_feeder_args:
   window_size: 288
   normalization: False
   random_rot: True
-  random_scale: True
+  aug: None
   p_interval: [0.5, 1]
   vel: False
   bone: False
