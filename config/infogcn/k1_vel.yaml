@@ -1,4 +1,4 @@
-work_dir: ./work_dir/infogcn/k1
+work_dir: ./work_dir/infogcn/k1_vel
 
 # feeder
 feeder: feeders.feeder_uav.Feeder
