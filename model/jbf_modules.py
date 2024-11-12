@@ -313,71 +313,6 @@ class SA_GC(nn.Module):
         return out
 
 
-class DeSGC(nn.Module):
-    """
-    Note: This module is not included in the open-source release due to subsequent research and development.
-    It will be made available in future updates after the completion of related studies.
-    """
-
-    def __init__(
-        self, in_channels, out_channels, A, k, num_scale=4, num_frame=64, num_joint=25
-    ):
-        super(DeSGC, self).__init__()
-
-        A = torch.from_numpy(A.astype(np.float32))
-        self.Nh = A.size(0)
-        self.A = nn.Parameter(A)
-        self.B = nn.Parameter(A)
-
-        self.num_scale = num_scale
-        self.k = k
-        self.delta = 10
-
-        rel_channels = in_channels // 8 if in_channels != 3 else 8
-        self.factor = rel_channels // num_scale
-
-        self.pe = PositionalEncoding(in_channels, num_joint, num_frame)
-        self.conv = PointWiseTCN(
-            in_channels, out_channels * self.Nh, 1, groups=num_scale
-        )
-        self.convQK = nn.Conv2d(
-            in_channels, 2 * rel_channels * self.Nh, 1, groups=num_scale
-        )
-        self.convW = nn.Conv2d(
-            rel_channels * self.Nh,
-            out_channels * self.Nh,
-            1,
-            groups=num_scale * self.Nh,
-        )
-
-        self.alpha = nn.Parameter(torch.zeros(1))
-        self.beta = nn.Parameter(torch.zeros(1, 1, self.Nh, 1, 1, 1))
-        self.bn = nn.BatchNorm2d(out_channels)
-
-        self.tanh = nn.Tanh()
-        self.relu = nn.LeakyReLU(LEAKY_ALPHA)
-
-    def forward(self, x):
-        N, C, T, V = x.size()
-        res = x
-        v = self.relu(self.conv(x)).view(N, self.num_scale, self.Nh, -1, T, V)
-        dtype, device = v.dtype, v.device
-
-        # calculate score
-        # ...
-
-        # calculate weight
-        # ...
-
-        # convert to onehot
-        # ...
-
-        # sampling & aggregation
-        # ...
-
-        return x
-
-
 class DeTGC(nn.Module):
     def __init__(
         self,
@@ -502,7 +437,7 @@ class MultiScale_TemporalModeling(nn.Module):
         return x
 
 
-class Basic_Block(nn.Module):
+class CTR_Basic_Block(nn.Module):
     def __init__(
         self,
         in_channels,
@@ -517,7 +452,7 @@ class Basic_Block(nn.Module):
         num_joint=25,
         residual=True,
     ):
-        super(Basic_Block, self).__init__()
+        super(CTR_Basic_Block, self).__init__()
 
         num_scale = 4
         scale_channels = out_channels // num_scale
@@ -526,13 +461,6 @@ class Basic_Block(nn.Module):
         if in_channels == 3:
             self.gcn = ST_GC(in_channels, out_channels, A)
         else:
-            # self.gcn = DeSGC(in_channels,
-            #                  out_channels,
-            #                  A,
-            #                  k,
-            #                  self.num_scale,
-            #                  num_frame=num_frame,
-            #                  num_joint=num_joint)
             self.gcn = CTR_GC(in_channels, out_channels, A, self.num_scale)
         self.tcn = MultiScale_TemporalModeling(
             out_channels,
@@ -595,13 +523,6 @@ class Info_Basic_Block(nn.Module):
         if in_channels == 3:
             self.gcn = ST_GC(in_channels, out_channels, A)
         else:
-            # self.gcn = DeSGC(in_channels,
-            #                  out_channels,
-            #                  A,
-            #                  k,
-            #                  self.num_scale,
-            #                  num_frame=num_frame,
-            #                  num_joint=num_joint)
             self.gcn = SA_GC(in_channels, out_channels, A)
         self.tcn = MultiScale_TemporalModeling(
             out_channels,
@@ -639,71 +560,3 @@ class Info_Basic_Block(nn.Module):
         x = self.relu(x + self.residual2(res))
         return x
 
-
-class DeT_Basic_Block(nn.Module):
-    def __init__(
-        self,
-        in_channels,
-        out_channels,
-        A,
-        k,
-        eta,
-        kernel_size=5,
-        stride=1,
-        dilations=2,
-        num_frame=64,
-        num_joint=25,
-        residual=True,
-    ):
-        super(DeT_Basic_Block, self).__init__()
-
-        num_scale = 4
-        scale_channels = out_channels // num_scale
-        self.num_scale = num_scale if in_channels != 3 else 1
-
-        if in_channels == 3:
-            self.gcn = ST_GC(in_channels, out_channels, A)
-        else:
-            # self.gcn = DeSGC(in_channels,
-            #                  out_channels,
-            #                  A,
-            #                  k,
-            #                  self.num_scale,
-            #                  num_frame=num_frame,
-            #                  num_joint=num_joint)
-            self.gcn = DeTGC(in_channels, out_channels, eta, num_scale=self.num_scale)
-        self.tcn = MultiScale_TemporalModeling(
-            out_channels,
-            out_channels,
-            eta,
-            stride=stride,
-            num_scale=num_scale,
-            num_frame=num_frame,
-        )
-
-        if in_channels != out_channels:
-            self.residual1 = PointWiseTCN(
-                in_channels, out_channels, groups=self.num_scale
-            )
-        else:
-            self.residual1 = lambda x: x
-
-        if not residual:
-            self.residual2 = lambda x: 0
-        elif (in_channels == out_channels) and (stride == 1):
-            self.residual2 = lambda x: x
-        else:
-            self.residual2 = PointWiseTCN(
-                in_channels, out_channels, stride=stride, groups=self.num_scale
-            )
-
-        self.relu = nn.LeakyReLU(LEAKY_ALPHA)
-        init_param(self.modules())
-
-    def forward(self, x):
-        res = x
-        x = self.gcn(x)
-        x = self.relu(x + self.residual1(res))
-        x = self.tcn(x)
-        x = self.relu(x + self.residual2(res))
-        return x
