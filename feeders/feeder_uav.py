@@ -12,7 +12,7 @@ hip_index  = [11, 12]
 
 class Feeder(Dataset):
     def __init__(self, data_path, label_path=None, p_interval=1, split='train', random_choose=False, random_shift=False,
-                 random_move=False, random_rot=False, random_scale=False, window_size=-1, normalization=False, debug=False, use_mmap=False,
+                 random_move=False, random_rot=False, aug=None, window_size=-1, normalization=False, debug=False, use_mmap=False,
                  bone=False, vel=False):
         """
         :param data_path:
@@ -43,7 +43,7 @@ class Feeder(Dataset):
         self.use_mmap = use_mmap
         self.p_interval = p_interval
         self.random_rot = random_rot
-        self.random_scale = random_scale
+        self.aug = aug
         self.bone = bone
         self.vel = vel
         self.load_data()
