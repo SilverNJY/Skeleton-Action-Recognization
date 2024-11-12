@@ -42,13 +42,6 @@ skeleton-acton-det
 ```
 
 
-## 训练好的模型目录:
- ```
- - work_dir/ctrgcn
-      -k1/k1_best.pt
-  ...
-```
-
 ## 代码依赖库
 The main environment configuration is as follows,
 - python=3.8.13
