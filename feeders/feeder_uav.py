@@ -4,7 +4,6 @@ from torch.utils.data import Dataset
 
 from feeders import tools
 
-
 head_index = [0, 1, 2, 3, 4]
 arm_index  = [5, 6, 7, 8, 9, 10]
 leg_index  = [13, 14, 15, 16]
@@ -13,7 +12,7 @@ hip_index  = [11, 12]
 
 class Feeder(Dataset):
     def __init__(self, data_path, label_path=None, p_interval=1, split='train', random_choose=False, random_shift=False,
-                 random_move=False, random_rot=False, window_size=-1, normalization=False, debug=False, use_mmap=False,
+                 random_move=False, random_rot=False, random_scale=False, window_size=-1, normalization=False, debug=False, use_mmap=False,
                  bone=False, vel=False):
         """
         :param data_path:
@@ -44,6 +43,7 @@ class Feeder(Dataset):
         self.use_mmap = use_mmap
         self.p_interval = p_interval
         self.random_rot = random_rot
+        self.random_scale = random_scale
         self.bone = bone
         self.vel = vel
         self.load_data()
@@ -76,9 +76,17 @@ class Feeder(Dataset):
         # reshape Tx(MVC) to CTVM
         data_numpy = tools.valid_crop_resize(data_numpy, valid_frame_num, self.p_interval, self.window_size)
         if self.random_rot:
-            data_numpy = tools.random_rot(data_numpy)
+            # data_numpy = tools.drone_view_augmentation(data_numpy)  # 先应用整体视角的无人机增强
+            data_numpy = tools.random_rot(data_numpy)  # 然后进行逐帧的随机旋转增强
+        if self.random_scale:
+            data_numpy = tools.random_scale(data_numpy)
         if self.bone:
-            from .bone_pairs import uav_pairs
+            uav_pairs = (
+                (10, 8), (8, 6), (9, 7), (7, 5), # arms
+                (15, 13), (13, 11), (16, 14), (14, 12), # legs
+                (11, 5), (12, 6), (11, 12), (5, 6), # torso
+                (5, 0), (6, 0), (1, 0), (2, 0), (3, 1), (4, 2) # nose, eyes and ears
+            )
             bone_data_numpy = np.zeros_like(data_numpy)
             for v1, v2 in uav_pairs:
                 # bone_data_numpy[:, :, v1 - 1] = data_numpy[:, :, v1 - 1] - data_numpy[:, :, v2 - 1]
