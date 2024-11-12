@@ -75,11 +75,10 @@ class Feeder(Dataset):
         valid_frame_num = np.sum(data_numpy.sum(0).sum(-1).sum(-1) != 0)
         # reshape Tx(MVC) to CTVM
         data_numpy = tools.valid_crop_resize(data_numpy, valid_frame_num, self.p_interval, self.window_size)
+        if self.aug:
+            data_numpy = tools.apply_augmentation(data_numpy, self.aug)
         if self.random_rot:
-            # data_numpy = tools.drone_view_augmentation(data_numpy)  # 先应用整体视角的无人机增强
-            data_numpy = tools.random_rot(data_numpy)  # 然后进行逐帧的随机旋转增强
-        if self.random_scale:
-            data_numpy = tools.random_scale(data_numpy)
+            data_numpy = tools.random_rot(data_numpy)
         if self.bone:
             uav_pairs = (
                 (10, 8), (8, 6), (9, 7), (7, 5), # arms
