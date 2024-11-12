@@ -503,7 +503,7 @@ class Model_lst_4part_uav(nn.Module):
                 ),
             )
 
-        return y_hat, z, feature_dict, self.logit_scale, [head_feature, hand_feature, hip_feature, foot_feature]
+        return (y_hat, z), feature_dict, self.logit_scale, [head_feature, hand_feature, hip_feature, foot_feature]
     
     
 class Model_lst_4part_uav_bone(nn.Module):
@@ -777,8 +777,7 @@ class Model_lst_4part_uav_bone(nn.Module):
             )
 
         return (
-            y_hat,
-            z,
+            (y_hat,z),
             feature_dict,
             self.logit_scale,
             [head_feature, hand_feature, hip_feature, foot_feature],
