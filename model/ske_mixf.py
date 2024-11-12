@@ -221,8 +221,8 @@ class Model_lst_4part_uav(nn.Module):
         for name in self.head:
             feature_dict[name] = self.linear_head[name](x)
         return (
-            self.fc(x),
-            x,
+            (self.fc(x),
+            x),
             feature_dict,
             self.logit_scale,
             [head_feature, hand_feature, hip_feature, foot_feature],
