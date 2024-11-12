@@ -91,6 +91,10 @@ python infer.py
 
 ```
 
+## 训练日志、权重、置信度文件（国赛）
+```
+https://drive.google.com/file/d/1VpaRxmR4IazGPNWx3Wojfv-XFBW-CEfx/view?usp=sharing
+```
 
 ## 训练的最好权重以及日志（省赛）
 ```
