@@ -1,3 +1,4 @@
+work_dir: ./work_dir/wrapper/ctrgcn/k1
 # feeder
 feeder: feeders.feeder_uav.Feeder
 train_feeder_args:
@@ -36,7 +37,6 @@ wrapper_args:
   pooling_seg: [1,1,1]
   c1: 64
   c2: 8
-work_dir: ./work_dir/ctrgcn/k1
 model: model.ctrgcn.Model_lst_4part_uav_bone
 model_args:
   num_class: 155
