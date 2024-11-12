@@ -3,8 +3,8 @@ work_dir: ./work_dir/mixformer/k1_vel
 # feeder
 feeder: feeders.feeder_uav.Feeder
 train_feeder_args:
-  data_path: data/new_train_joint.npy
-  label_path: data/new_train_label.npy
+  data_path: data/train_joint.npy
+  label_path: data/train_label.npy
   split: train
   debug: False
   random_choose: False
@@ -18,8 +18,8 @@ train_feeder_args:
   bone: False
 
 test_feeder_args:
-  data_path: data/new_predicted_joint.npy
-  label_path: data/new_predicted_label.npy
+  data_path: data/val_joint.npy
+  label_path: data/val_label.npy
   split: test
   window_size: 64
   p_interval: [0.95]
