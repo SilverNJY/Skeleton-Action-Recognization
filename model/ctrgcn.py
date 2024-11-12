@@ -518,22 +518,22 @@ class Model_lst_4part_uav_bone(nn.Module):
         x = rearrange(x, '(n m t) v c -> n (m v c) t', m=M, t=T).contiguous()
         x = self.data_bn(x)
         x = x.view(N, M, V, C, T).permute(0, 1, 3, 4, 2).contiguous().view(N * M, C, T, V)
-        x = self.l1(x)
+        x, _ = self.l1(x)
         feat_low = x.clone()
 
-        x = self.l2(x)
-        x = self.l3(x)
-        x = self.l4(x)
-        x = self.l5(x)
+        x, _ = self.l2(x)
+        x, _ = self.l3(x)
+        x, _ = self.l4(x)
+        x, _ = self.l5(x)
         feat_mid = x.clone()
 
-        x = self.l6(x)
-        x = self.l7(x)
-        x = self.l8(x)
+        x, _ = self.l6(x)
+        x, _ = self.l7(x)
+        x, _ = self.l8(x)
         feat_high = x.clone()
 
-        x = self.l9(x)
-        x = self.l10(x)
+        x, _ = self.l9(x)
+        x, graph = self.l10(x)
         feat_fin = x.clone()
 
         # N*M,C,T,V
@@ -571,7 +571,7 @@ class Model_lst_4part_uav_bone(nn.Module):
                 self.logit_scale,
                 [head_feature, hand_feature, hip_feature, foot_feature],
             )
-        return self.fc(x), feature_dict, self.logit_scale, [head_feature, hand_feature, hip_feature, foot_feature]
+        return ((self.fc(x), x), feature_dict, self.logit_scale, [head_feature, hand_feature, hip_feature, foot_feature])
 
 
 class Model_lst_4part_uav_used_parts(nn.Module):
@@ -765,184 +765,5 @@ class Model_lst_4part_uav_used_parts(nn.Module):
         x = self.drop_out(x)
         if get_cl_loss and self.cl_mode == "ST-Multi-Level":
             return self.get_ST_Multi_Level_cl_output(x, feat_low, feat_mid, feat_high, feat_fin, label)
-
-        return self.fc(x), feature_dict, self.logit_scale, [head_feature, hand_feature, hip_feature, foot_feature]
-
-
-class Model_lst_4part_uav_bone_used_parts(nn.Module):
-    def build_cl_blocks(self):
-        if self.cl_mode == "ST-Multi-Level":
-            self.ren_low = ST_RenovateNet(
-                self.base_channel,
-                self.num_frame,
-                self.num_point,
-                self.num_person,
-                n_class=self.num_class,
-                version=self.cl_version,
-                pred_threshold=self.pred_threshold,
-                use_p_map=self.use_p_map,
-            )
-            self.ren_mid = ST_RenovateNet(
-                self.base_channel * 2,
-                self.num_frame // 2,
-                self.num_point,
-                self.num_person,
-                n_class=self.num_class,
-                version=self.cl_version,
-                pred_threshold=self.pred_threshold,
-                use_p_map=self.use_p_map,
-            )
-            self.ren_high = ST_RenovateNet(
-                self.base_channel * 4,
-                self.num_frame // 4,
-                self.num_point,
-                self.num_person,
-                n_class=self.num_class,
-                version=self.cl_version,
-                pred_threshold=self.pred_threshold,
-                use_p_map=self.use_p_map,
-            )
-            self.ren_fin = ST_RenovateNet(
-                self.base_channel * 4,
-                self.num_frame // 4,
-                self.num_point,
-                self.num_person,
-                n_class=self.num_class,
-                version=self.cl_version,
-                pred_threshold=self.pred_threshold,
-                use_p_map=self.use_p_map,
-            )
-        else:
-            raise KeyError(f"no such Contrastive Learning Mode {self.cl_mode}")
-
-    def __init__(self, num_class=155, num_point=17, num_person=2, graph=None, graph_args=dict(), in_channels=3,
-                 drop_out=0, adaptive=True, head=['ViT-B/32'], k=1):
-        super(Model_lst_4part_uav_bone_used_parts, self).__init__()
-
-        if graph is None:
-            raise ValueError()
-        else:
-            Graph = import_class(graph)
-            self.graph = Graph(**graph_args)
-
-        A = self.graph.A # 3,17,17
-        self.A_vector = self.get_A(graph, k).float()
-
-        self.num_class = num_class
-        self.num_point = num_point
-        self.data_bn = nn.BatchNorm1d(num_person * in_channels * num_point)
-
-        base_channel = 64
-        self.l1 = TCN_GCN_unit(in_channels, base_channel, A, residual=False, adaptive=adaptive)
-        self.l2 = TCN_GCN_unit(base_channel, base_channel, A, adaptive=adaptive)
-        self.l3 = TCN_GCN_unit(base_channel, base_channel, A, adaptive=adaptive)
-        self.l4 = TCN_GCN_unit(base_channel, base_channel, A, adaptive=adaptive)
-        self.l5 = TCN_GCN_unit(base_channel, base_channel*2, A, stride=2, adaptive=adaptive)
-        self.l6 = TCN_GCN_unit(base_channel*2, base_channel*2, A, adaptive=adaptive)
-        self.l7 = TCN_GCN_unit(base_channel*2, base_channel*2, A, adaptive=adaptive)
-        self.l8 = TCN_GCN_unit(base_channel*2, base_channel*4, A, stride=2, adaptive=adaptive)
-        self.l9 = TCN_GCN_unit(base_channel*4, base_channel*4, A, adaptive=adaptive)
-        self.l10 = TCN_GCN_unit(base_channel*4, base_channel*4, A, adaptive=adaptive)
-
-        self.linear_head = nn.ModuleDict()
-        self.logit_scale = nn.Parameter(torch.ones(1,5) * np.log(1 / 0.07))
-
-        self.part_list = nn.ModuleList()
-
-        for i in range(4):
-            self.part_list.append(nn.Linear(256,512))
-
-        self.head = head
-        if 'ViT-B/32' in self.head:
-            self.linear_head['ViT-B/32'] = nn.Linear(256,512)
-            conv_init(self.linear_head['ViT-B/32'])        
-        if 'ViT-B/16' in self.head:
-            self.linear_head['ViT-B/16'] = nn.Linear(256,512)
-            conv_init(self.linear_head['ViT-B/16'])
-        if 'ViT-L/14' in self.head:
-            self.linear_head['ViT-L/14'] = nn.Linear(256,768)
-            conv_init(self.linear_head['ViT-L/14'])
-        if 'ViT-L/14@336px' in self.head:
-            self.linear_head['ViT-L/14@336px'] = nn.Linear(256,768)
-            conv_init(self.linear_head['ViT-L/14@336px'])
-
-        if 'RN50x64' in self.head:
-            self.linear_head['RN50x64'] = nn.Linear(256,1024)
-            conv_init(self.linear_head['RN50x64'])
-
-        if 'RN50x16' in self.head:
-            self.linear_head['RN50x16'] = nn.Linear(256,768)
-            conv_init(self.linear_head['RN50x16'])
-
-        self.fc = nn.Linear(base_channel*4, num_class)
-        nn.init.normal_(self.fc.weight, 0, math.sqrt(2. / num_class))
-        bn_init(self.data_bn, 1)
-        if drop_out:
-            self.drop_out = nn.Dropout(drop_out)
-        else:
-            self.drop_out = lambda x: x
-        if self.cl_mode is not None:
-            self.build_cl_blocks()
-
-    def get_A(self, graph, k):
-        Graph = import_class(graph)()
-        A_outward = Graph.A_outward_binary
-        I = np.eye(Graph.num_node)
-        if k == 0:
-            return torch.from_numpy(I)
-        return  torch.from_numpy(I - np.linalg.matrix_power(A_outward, k))
-
-    def forward(self, x, used_parts_list=[], istrain=False):
-        if len(x.shape) == 3:
-            N, T, VC = x.shape
-            x = x.view(N, T, self.num_point, -1).permute(0, 3, 1, 2).contiguous().unsqueeze(-1)
-        N, C, T, V, M = x.size()
-        x = rearrange(x, 'n c t v m -> (n m t) v c', m=M, v=V).contiguous()
-
-        x = self.A_vector.to(x.device).expand(N*M*T, -1, -1) @ x
-        x = rearrange(x, '(n m t) v c -> n (m v c) t', m=M, t=T).contiguous()
-        x = self.data_bn(x)
-        x = x.view(N, M, V, C, T).permute(0, 1, 3, 4, 2).contiguous().view(N * M, C, T, V)
-        x = self.l1(x)
-        feat_low = x.clone()
-        x = self.l2(x)
-        x = self.l3(x)
-        x = self.l4(x)
-        if istrain:
-            useful_mask = get_used_joint_mask(x, used_parts_list)
-            x = x*useful_mask.to(x.device) 
-        x = self.l5(x)
-        feat_mid = x.clone()
-        x = self.l6(x)
-        x = self.l7(x)
-        x = self.l8(x)
-        feat_high = x.clone()
-        x = self.l9(x)
-        x = self.l10(x)
-        feat_fin = x.clone()
-
-        # N*M,C,T,V
-        c_new = x.size(1)
-
-        feature = x.view(N,M,c_new,T//4,V)
-        head_list = torch.Tensor([0,1,2,3,4]).long() 
-        hand_list = torch.Tensor([5,6,7,8,9,10]).long() 
-        foot_list = torch.Tensor([13,14,15,16]).long() 
-        hip_list = torch.Tensor([11,12]).long() 
-
-        head_feature = self.part_list[0](feature[:,:,:,:,head_list].mean(4).mean(3).mean(1))
-        hand_feature = self.part_list[1](feature[:,:,:,:,hand_list].mean(4).mean(3).mean(1))
-        foot_feature = self.part_list[2](feature[:,:,:,:,foot_list].mean(4).mean(3).mean(1))
-        hip_feature = self.part_list[3](feature[:,:,:,:,hip_list].mean(4).mean(3).mean(1))
-
-        x = x.view(N, M, c_new, -1)
-        x = x.mean(3).mean(1)
-
-        feature_dict = dict()
-
-        for name in self.head:
-            feature_dict[name] = self.linear_head[name](x)
-
-        x = self.drop_out(x)
 
         return self.fc(x), feature_dict, self.logit_scale, [head_feature, hand_feature, hip_feature, foot_feature]
