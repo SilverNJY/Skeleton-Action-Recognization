@@ -1,10 +1,11 @@
 import random
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 
 import torch
 import torch.nn.functional as F
+from feeders.bone_pairs import *
 
 def valid_crop_resize(data_numpy,valid_frame_num,p_interval,window):
     # input: C,T,V,M
@@ -232,3 +233,133 @@ def openpose_match(data_numpy):
     data_numpy = data_numpy[:, :, :, rank]
 
     return data_numpy
+
+
+def random_tilt(data_torch, tilt_range=5):
+    """随机倾斜骨架"""
+    tilt_angle = random.uniform(-tilt_range, tilt_range)
+    tilt_angle = torch.deg2rad(torch.tensor(tilt_angle, dtype=torch.float32))
+    tilt_matrix = torch.tensor(
+        [[1, 0, torch.tan(tilt_angle)], [0, 1, 0], [0, 0, 1]], dtype=torch.float32
+    )
+
+    C, T, V, M = data_torch.shape
+    data_torch = data_torch.permute(1, 3, 2, 0).contiguous().view(T * M, V, C)
+    root = data_torch[:, :1, :]
+    data_torch = data_torch - root  # 相对于根关节点
+
+    data_torch = torch.matmul(data_torch, tilt_matrix)  # 应用倾斜变换
+    data_torch = data_torch + root  # 恢复到根关节点
+
+    data_torch = data_torch.view(T, M, V, C).permute(3, 0, 2, 1).contiguous()
+    return data_torch
+
+
+def random_shear(data_torch, shear_range=0.2):
+    """随机剪切骨架方向"""
+    shear_factors = [random.uniform(-shear_range, shear_range) for _ in range(4)]
+    shear_matrix = torch.tensor(
+        [
+            [1, shear_factors[0], shear_factors[1]],
+            [shear_factors[2], 1, shear_factors[3]],
+            [0, 0, 1],
+        ],
+        dtype=torch.float32,
+    )
+
+    C, T, V, M = data_torch.shape
+    data_torch = data_torch.permute(1, 3, 2, 0).contiguous().view(T * M, V, C)
+    root = data_torch[:, :1, :]
+    data_torch = data_torch - root  # 相对于根关节点
+
+    data_torch = torch.matmul(data_torch, shear_matrix)  # 应用剪切变换
+    data_torch = data_torch + root  # 恢复到根关节点
+
+    data_torch = data_torch.view(T, M, V, C).permute(3, 0, 2, 1).contiguous()
+    return data_torch
+
+
+def random_translation(data_torch, max_translate=0.1):
+    """随机平移骨架"""
+    C, T, V, M = data_torch.shape
+    translation = torch.FloatTensor(3).uniform_(
+        -max_translate, max_translate
+    )  # 随机平移向量
+
+    data_torch = data_torch + translation.view(3, 1, 1, 1)  # 平移到每个关节点
+    return data_torch
+
+
+def random_scale(data_torch, theta=0.2):
+    """随机放缩骨骼长度"""
+    C, T, V, M = data_torch.shape
+    data_torch = data_torch.permute(1, 3, 2, 0).contiguous().view(T * M, V, C)
+
+    root = data_torch[:, :1, :]
+    data_torch = data_torch - root  # 相对于根关节点
+
+    bones_len, bones_dir = get_vec_by_pose(data_torch)
+    scale = (
+        torch.zeros(V - 1).uniform_(-theta, theta) + 1
+    )  # 在 [1 - θ, 1 + θ] 范围内随机缩放
+    scale = scale.unsqueeze(0).unsqueeze(-1)
+    scale = torch.matmul(get_sym_bone_matrix(), scale)  # 保持对称骨骼一致
+    bones_len = bones_len * scale
+
+    data_torch = get_pose_by_vec(bones_dir * bones_len)
+    data_torch = data_torch + root  # 恢复到根关节点
+
+    data_torch = data_torch.view(T, M, V, C).permute(3, 0, 2, 1).contiguous()
+    return data_torch
+
+
+def random_rotation(data_torch, max_angle=15):
+    """随机旋转骨架"""
+    angle = torch.FloatTensor(1).uniform_(-max_angle, max_angle)
+    angle = torch.deg2rad(angle)  # 转换为弧度
+    rotation_matrix = torch.tensor(
+        [
+            [torch.cos(angle), -torch.sin(angle), 0],
+            [torch.sin(angle), torch.cos(angle), 0],
+            [0, 0, 1],
+        ],
+        dtype=torch.float32,
+    )
+
+    C, T, V, M = data_torch.shape
+    data_torch = data_torch.permute(1, 3, 2, 0).contiguous().view(T * M, V, C)
+    root = data_torch[:, :1, :]
+    data_torch = data_torch - root  # 相对于根关节点
+
+    data_torch = torch.matmul(data_torch, rotation_matrix)  # 应用旋转变换
+    data_torch = data_torch + root  # 恢复到根关节点
+
+    data_torch = data_torch.view(T, M, V, C).permute(3, 0, 2, 1).contiguous()
+    return data_torch
+
+
+def apply_augmentation(data_torch, augmentations=None):
+    """
+    参数:
+    - data_torch: 输入的骨骼数据。
+    - augmentations: 包含所需增强类型的列表，默认 None 表示所有类型都将应用。
+      可选项：['scale', 'rotation', 'translation', 'shear', 'tilt']
+
+    返回:
+    - 增强后的骨骼数据。
+    """
+    if augmentations is None:
+        augmentations = ["scale", "rotation", "translation", "shear", "tilt"]
+
+    if "scale" in augmentations:
+        data_torch = random_scale(data_torch, theta=0.2)
+    if "rotation" in augmentations:
+        data_torch = random_rotation(data_torch, max_angle=5)
+    if "translation" in augmentations:
+        data_torch = random_translation(data_torch, max_translate=0.1)
+    if "shear" in augmentations:
+        data_torch = random_shear(data_torch, shear_range=0.2)
+    if "tilt" in augmentations:
+        data_torch = random_tilt(data_torch, tilt_range=5)
+
+    return data_torch
