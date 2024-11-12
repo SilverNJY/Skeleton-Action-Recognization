@@ -28,7 +28,7 @@ test_feeder_args:
   debug: False
 
 # model
-model: model.ske_mixf.Model_lst_4part_uav
+model: model.ske_mixf.Model_lst_4part_uav_bone
 model_args:
   num_class: 155
   num_point: 17
