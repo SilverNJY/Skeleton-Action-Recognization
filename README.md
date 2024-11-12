@@ -72,7 +72,10 @@ CUDA_VISIBLE_DEVICES=0 python train.py --config config/ctrgcn/k8.yaml --model mo
 ### 组合模型与模态
 ```
 # Example: 在官方数据集上组合模型与模态进行测试
+# 在ensemble_config.py中进行权重配置
+# 测试集路径: data/test_joint_B & data/test_label_B
 python ensemble.py
+
 ```
 
 
