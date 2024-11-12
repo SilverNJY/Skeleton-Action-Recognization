@@ -1,4 +1,4 @@
-work_dir: ./work_dir/ctrgcn/k1
+work_dir: ./work_dir/ctrgcn/k1f
 
 # feeder
 feeder: feeders.feeder_uav.Feeder
@@ -10,18 +10,19 @@ train_feeder_args:
   random_choose: False
   random_shift: False
   random_move: False
-  window_size: 300
+  window_size: 288
   normalization: False
   random_rot: True
+  aug: None
   p_interval: [0.5, 1]
   vel: False
   bone: False
 
 test_feeder_args:
-  data_path: data/test_joint.npy
-  label_path: data/test_label.npy
+  data_path: data/val_joint.npy
+  label_path: data/val_label.npy
   split: test
-  window_size: 300
+  window_size: 288
   p_interval: [0.95]
   vel: False
   bone: False
@@ -41,15 +42,21 @@ model_args:
   cl_mode: Null  
 
 #optim
-weight_decay: 0.0005
+weight_decay: 0.0004
 base_lr: 0.1
 lr_decay_rate: 0.1
-step: [40,50]
+step: [30,50]
 warm_up_epoch: 5
 
 # training
 device: [0]
 batch_size: 64
 test_batch_size: 64
-num_epoch: 70
+num_epoch: 60
 nesterov: True
+
+# loss
+loss: LabelSmoothingCrossEntropy
+loss_args:
+  smoothing: 0.1
+  temperature: 1.1
