@@ -87,7 +87,7 @@ python infer.py
 
 ```
 
-## 训练日志、权重、置信度文件（国赛）
+## 训练日志、权重、置信度文件存放文件夹work_dir & results（国赛）
 ```
 https://drive.google.com/file/d/1VpaRxmR4IazGPNWx3Wojfv-XFBW-CEfx/view?usp=sharing
 ```
