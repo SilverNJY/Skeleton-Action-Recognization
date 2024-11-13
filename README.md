@@ -89,7 +89,7 @@ python infer.py
 
 ## 训练日志、权重、置信度文件存放文件夹work_dir & results（国赛）
 ```
-https://drive.google.com/file/d/1VpaRxmR4IazGPNWx3Wojfv-XFBW-CEfx/view?usp=sharing
+https://drive.google.com/file/d/1p4tvkQlglZDMsM8jMkUaflnyAZjZK3ex/view?usp=drive_link
 ```
 
 ## 训练的最好权重以及日志（省赛）
